@@ -1,6 +1,6 @@
 # TransFuser
 
-![TransFuser](transfuser/assets/transfuser.png)
+![TransFuser](transfuser/assets/model.png)
 
 This repository contains the code for the CVPR 2021 paper [Multi-Modal Fusion Transformer for End-to-End Autonomous Driving](http://www.cvlibs.net/publications/Prakash2021CVPR.pdf). If you find our code or paper useful, please cite
 ```bibtex
