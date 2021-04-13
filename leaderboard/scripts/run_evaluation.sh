@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export CARLA_ROOT=<path_to_carla_directory>
+export CARLA_ROOT=carla
 export CARLA_SERVER=${CARLA_ROOT}/CarlaUE4.sh
 export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI
 export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla
@@ -16,11 +16,11 @@ export TM_PORT=8000 # port for traffic manager, required when spawning multiple 
 export DEBUG_CHALLENGE=0
 export REPETITIONS=1 # multiple evaluation runs
 export ROUTES=leaderboard/data/evaluation_routes/routes_town05_long.xml
-export TEAM_AGENT=leaderboard/team_code/aim_agent.py # agent
-export TEAM_CONFIG=aim/log/aim_ckpt # model checkpoint
+export TEAM_AGENT=leaderboard/team_code/auto_pilot.py # agent
+export TEAM_CONFIG=aim/log/aim_ckpt # model checkpoint, not required for expert
 export CHECKPOINT_ENDPOINT=results/sample_result.json # results file
 export SCENARIOS=leaderboard/data/scenarios/no_scenarios.json
-export SAVE_PATH=visualization/aim # path for saving episodes while evaluating
+export SAVE_PATH=data/expert # path for saving episodes while evaluating
 export RESUME=True
 
 python3 ${LEADERBOARD_ROOT}/leaderboard/leaderboard_evaluator.py \
