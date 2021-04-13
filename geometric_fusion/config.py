@@ -10,10 +10,10 @@ class GlobalConfig:
     val_towns = ['Town05']
     train_data, val_data = [], []
     for town in train_towns:
-        train_data.append(os.path.join(root_dir, town))
-        train_data.append(os.path.join(root_dir, town+'_small'))
+        train_data.append(os.path.join(root_dir, town+'_tiny'))
+        train_data.append(os.path.join(root_dir, town+'_short'))
     for town in val_towns:
-        val_data.append(os.path.join(root_dir, town))
+        val_data.append(os.path.join(root_dir, town+'_short'))
 
     ignore_sides = True # don't consider side cameras
     ignore_rear = True # don't consider rear cameras
