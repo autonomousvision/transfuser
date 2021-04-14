@@ -84,19 +84,19 @@ Each route is defined by a sequence of waypoints (and optionally a weather condi
 #### Generating routes with intersections
 The position of traffic lights is used to localize intersections and (start_wp, end_wp) pairs are sampled in a grid centered at these points.
 ```Shell
-python3 generate_intersection_routes.py --save_file <path_of_generated_routes_file> --town <town_to_be_used>
+python3 tools/generate_intersection_routes.py --save_file <path_of_generated_routes_file> --town <town_to_be_used>
 ```
 
 #### Sampling individual junctions from a route
 Each route in the provided routes file is interpolated into a dense sequence of waypoints and individual junctions are sampled from these based on change in navigational commands.
 ```Shell
-python3 sample_junctions.py --routes_file <xml_file_containing_routes> --save_file <path_of_generated_file>
+python3 tools/sample_junctions.py --routes_file <xml_file_containing_routes> --save_file <path_of_generated_file>
 ```
 
 #### Generating Scenarios
 Additional scenarios are densely sampled in a grid centered at the locations from the [reference scenarios file](https://github.com/carla-simulator/leaderboard/blob/master/data/all_towns_traffic_scenarios_public.json). More scenario files can be found [here](https://github.com/carla-simulator/scenario_runner/tree/master/srunner/data).
 ```Shell
-python3 generate_scenarios.py --scenarios_file <scenarios_file_to_be_used_as_reference> --save_file <path_of_generated_json_file> --towns <town_to_be_used>
+python3 tools/generate_scenarios.py --scenarios_file <scenarios_file_to_be_used_as_reference> --save_file <path_of_generated_json_file> --towns <town_to_be_used>
 ```
 
 ## Training
