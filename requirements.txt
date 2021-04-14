@@ -106,3 +106,5 @@ Werkzeug==1.0.0
 widgetsnbextension==3.5.1
 xmlschema==1.0.18
 zipp==3.1.0
+ephem==3.7.7.1
+tabulate==0.8.7
