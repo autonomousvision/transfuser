@@ -242,11 +242,9 @@ class SensorInterface(object):
                     break
 
                 sensor_data = self._new_data_buffers.get(True, self._queue_timeout)
-                if sensor_data[1] % 200 == 0 and sensor_data[0]=='gps': print("Getting {} - {}".format(sensor_data[0],sensor_data[1])) # random check
                 data_dict[sensor_data[0]] = ((sensor_data[1], sensor_data[2]))
 
         except Empty:
-            print (data_dict.keys())
             raise SensorReceivedNoData("A sensor took too long to send their data")
 
         return data_dict

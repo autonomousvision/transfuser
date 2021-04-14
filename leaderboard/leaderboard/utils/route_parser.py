@@ -139,7 +139,7 @@ class RouteParser(object):
     @staticmethod
     def parse_preset_weather(route):
         """
-        Returns a carla.WeatherParameters with the corresponding weather for that route. If the route
+        Returns one of the 14 preset weather condition. If the route
         has no weather attribute, the default one is triggered.
         """
 

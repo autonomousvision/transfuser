@@ -148,7 +148,7 @@ class AgentWrapper(object):
                                                      yaw=sensor_spec['yaw'])
                 elif sensor_spec['type'].startswith('sensor.lidar'):
                     bp.set_attribute('range', str(85))
-                    bp.set_attribute('rotation_frequency', str(10)) # default: 10, change to 20 for old lidar models
+                    bp.set_attribute('rotation_frequency', str(10)) # default: 10, change to 20 to generate 360 degree LiDAR point cloud
                     bp.set_attribute('channels', str(64))
                     bp.set_attribute('upper_fov', str(10))
                     bp.set_attribute('lower_fov', str(-30))

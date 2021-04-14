@@ -39,7 +39,7 @@ class AutonomousAgent(object):
         self._global_plan_world_coord = None
 
         # this data structure will contain all sensor data
-        self.sensor_interface = SensorInterface() # commented out by aditya
+        self.sensor_interface = SensorInterface()
 
         # agent's initialization
         self.setup(path_to_conf_file)
