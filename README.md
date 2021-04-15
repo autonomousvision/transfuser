@@ -77,8 +77,37 @@ Once the CARLA server is running, rollout the autopilot to start data generation
 ```
 The expert agent used for data generation is defined in ```leaderboard/team_code/auto_pilot.py```. Different variables which need to be set are specified in ```leaderboard/scripts/run_evaluation.sh```. The expert agent is based on the autopilot from [this codebase](https://github.com/bradyz/2020_CARLA_challenge).
 
+### Routes and Scenarios
+
+Each route is defined by a sequence of waypoints (and optionally a weather condition) that the agent needs to follow. Each scenario is defined by a trigger transform (location and orientation) and other actors present in that scenario (optional). The [leaderboard repository](https://github.com/carla-simulator/leaderboard/tree/master/data) provides a set of routes and scenarios files. To generate additional routes, spin up a CARLA server and follow the procedure below.
+
+#### Generating routes with intersections
+The position of traffic lights is used to localize intersections and (start_wp, end_wp) pairs are sampled in a grid centered at these points.
+```Shell
+python3 tools/generate_intersection_routes.py --save_file <path_of_generated_routes_file> --town <town_to_be_used>
+```
+
+#### Sampling individual junctions from a route
+Each route in the provided routes file is interpolated into a dense sequence of waypoints and individual junctions are sampled from these based on change in navigational commands.
+```Shell
+python3 tools/sample_junctions.py --routes_file <xml_file_containing_routes> --save_file <path_of_generated_file>
+```
+
+#### Generating Scenarios
+Additional scenarios are densely sampled in a grid centered at the locations from the [reference scenarios file](https://github.com/carla-simulator/leaderboard/blob/master/data/all_towns_traffic_scenarios_public.json). More scenario files can be found [here](https://github.com/carla-simulator/scenario_runner/tree/master/srunner/data).
+```Shell
+python3 tools/generate_scenarios.py --scenarios_file <scenarios_file_to_be_used_as_reference> --save_file <path_of_generated_json_file> --towns <town_to_be_used>
+```
+
 ## Training
-The training code and pretrained models for different models used in our paper are provided below.
+The training code and pretrained models are provided below.
+```Shell
+mkdir model_ckpt
+wget https://s3.eu-central-1.amazonaws.com/avg-projects/transfuser/models.zip -P model_ckpt
+unzip model_ckpt/models.zip -d model_ckpt/
+rm model_ckpt/models.zip
+```
+
 - [CILRS](cilrs)
 - [LBC](https://github.com/bradyz/2020_CARLA_challenge)
 - [AIM](aim)
@@ -89,11 +118,11 @@ The training code and pretrained models for different models used in our paper a
 ## Evaluation
 Spin up a CARLA server (described above) and run the required agent. The adequate routes and scenarios files are provided in ```leaderboard/data``` and the required variables need to be set in ```leaderboard/scripts/run_evaluation.sh```.
 ```Shell
-./leaderboard/scripts/run_evaluation.sh
+CUDA_VISIBLE_DEVICES=<gpu_id> ./leaderboard/scripts/run_evaluation.sh
 ```
 
 ## Acknowledgements
-This implementation uses code from several amazing repositories.
+This implementation is based on codebase from several repositories.
 - [2020_CARLA_challenge](https://github.com/bradyz/2020_CARLA_challenge)
 - [OATomobile](https://github.com/OATML/oatomobile)
 - [CARLA Leaderboard](https://github.com/carla-simulator/leaderboard)
