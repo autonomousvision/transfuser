@@ -210,7 +210,7 @@ class AutoPilot(MapAgent):
 
         return any(x is not None for x in [vehicle, light, walker, stop_sign])
 
-    def _point_inside_boundingbox(point, bb_center, bb_extent):
+    def _point_inside_boundingbox(self, point, bb_center, bb_extent):
         A = carla.Vector2D(bb_center.x - bb_extent.x, bb_center.y - bb_extent.y)
         B = carla.Vector2D(bb_center.x + bb_extent.x, bb_center.y - bb_extent.y)
         D = carla.Vector2D(bb_center.x - bb_extent.x, bb_center.y + bb_extent.y)
