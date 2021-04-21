@@ -43,14 +43,14 @@ The training data is generated using ```leaderboard/team_code/auto_pilot.py``` i
 
 #### With Display
 ```Shell
-./CarlaUE4.sh -world-port=<port> -opengl
+./CarlaUE4.sh --world-port=2000 -opengl
 ```
 
 #### Without Display
 
 Without Docker:
 ```
-SDL_VIDEODRIVER=offscreen SDL_HINT_CUDA_DEVICE=<gpu_id> ./CarlaUE4.sh -world-port=<port> -opengl
+SDL_VIDEODRIVER=offscreen SDL_HINT_CUDA_DEVICE=0 ./CarlaUE4.sh --world-port=2000 -opengl
 ```
 
 With Docker:
@@ -59,12 +59,12 @@ Instructions for setting up docker are available [here](https://docs.nvidia.com/
 
 Docker 18:
 ```
-docker run -it --rm -p 2000-2002:2000-2002 --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=<gpu_id> carlasim/carla:0.9.10.1 ./CarlaUE4.sh -world-port=2000 -opengl
+docker run -it --rm -p 2000-2002:2000-2002 --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=0 carlasim/carla:0.9.10.1 ./CarlaUE4.sh --world-port=2000 -opengl
 ```
 
 Docker 19:
 ```Shell
-docker run -it --rm --net=host --gpus '"device=<gpu_id>"' carlasim/carla:0.9.10.1 ./CarlaUE4.sh -world-port=2000 -opengl
+docker run -it --rm --net=host --gpus '"device=0"' carlasim/carla:0.9.10.1 ./CarlaUE4.sh --world-port=2000 -opengl
 ```
 
 If the docker container doesn't start properly then add another environment variable ```-e SDL_AUDIODRIVER=dsp```.
@@ -118,7 +118,7 @@ rm model_ckpt/models.zip
 ## Evaluation
 Spin up a CARLA server (described above) and run the required agent. The adequate routes and scenarios files are provided in ```leaderboard/data``` and the required variables need to be set in ```leaderboard/scripts/run_evaluation.sh```.
 ```Shell
-CUDA_VISIBLE_DEVICES=<gpu_id> ./leaderboard/scripts/run_evaluation.sh
+CUDA_VISIBLE_DEVICES=0 ./leaderboard/scripts/run_evaluation.sh
 ```
 
 ## Acknowledgements
