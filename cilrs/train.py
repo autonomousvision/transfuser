@@ -146,10 +146,10 @@ class Engine(object):
 
 				# inference
 				encoding = [model.encoder(fronts)]
-				if not args.ignore_sides:
+				if not config.ignore_sides:
 					encoding.append(model.encoder(lefts))
 					encoding.append(model.encoder(rights))
-				if not args.ignore_rear:
+				if not config.ignore_rear:
 					encoding.append(model.encoder(rears))
 
 				steer, throttle, brake, velocity = model(encoding, gt_velocity, command)
@@ -189,8 +189,8 @@ class Engine(object):
 		}
 
 		# Save the recent model/optimizer states
-		model.load_state_dict(torch.load(os.path.join(args.logdir, 'recent_model.pth')))
-		optimizer.load_state_dict(torch.load(os.path.join(args.logdir, 'recent_optim.pth')))
+		torch.save(model.state_dict(), os.path.join(args.logdir, 'model.pth'))
+		torch.save(optimizer.state_dict(), os.path.join(args.logdir, 'recent_optim.pth'))
 
 		# Log other data corresponding to the recent model
 		with open(os.path.join(args.logdir, 'recent.log'), 'w') as f:
@@ -199,8 +199,8 @@ class Engine(object):
 		tqdm.write('====== Saved recent model ======>')
 		
 		if save_best:
-			model.load_state_dict(torch.load(os.path.join(args.logdir, 'best_model.pth')))
-			optimizer.load_state_dict(torch.load(os.path.join(args.logdir, 'best_optim.pth')))
+			torch.save(model.state_dict(), os.path.join(args.logdir, 'best_model.pth'))
+			torch.save(optimizer.state_dict(), os.path.join(args.logdir, 'best_optim.pth'))
 			tqdm.write('====== Overwrote best model ======>')
 
 # Config
