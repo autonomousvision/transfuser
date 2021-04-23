@@ -43,7 +43,7 @@ class Engine(object):
 		self.bestval_epoch = bestval_epoch
 		self.train_loss = []
 		self.val_loss = []
-		self.bestval = -1e5
+		self.bestval = 1e10
 
 	def train(self):
 		loss_epoch = 0.
