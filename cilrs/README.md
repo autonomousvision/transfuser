@@ -1,6 +1,6 @@
 # CILRS
 
-<p align="center"> <img src="assets/model.png" width="512"> </p>
+<p align="center"> <img src="assets/model.svg" width="512"> </p>
 
 [CILRS](https://arxiv.org/pdf/1904.08980.pdf) is a conditional imitation learning method in which the agent learns to predict vehicle controls from RGB image and measured speed while being conditioned on the navigational command. In addition, the output of the image encoder is also used for predicted the vehicle speed.
 
