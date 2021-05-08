@@ -1,6 +1,6 @@
 # Multi-Modal Fusion Transformer for End-to-End Autonomous Driving
 
-## [Project Page](https://ap229997.github.io/projects/transfuser/) | [Paper](https://arxiv.org/pdf/2104.09224.pdf) | Supplementary | [Video](https://youtu.be/cc05F56vjVI) | [Poster](https://ap229997.github.io/projects/transfuser/gfx/poster.pdf) | Blog
+## [Project Page](https://ap229997.github.io/projects/transfuser/) | [Paper](https://arxiv.org/pdf/2104.09224.pdf) | Supplementary | [Video](https://youtu.be/cc05F56vjVI) | [Poster](https://ap229997.github.io/projects/transfuser/assets/poster.pdf) | Blog
 
 <img src="transfuser/assets/teaser.png" height="192" hspace=30> <img src="transfuser/assets/full_arch.png" width="400">
 
