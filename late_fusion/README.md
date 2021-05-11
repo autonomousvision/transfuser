@@ -1,6 +1,6 @@
 # Late Fusion
 
-<p align="center"> <img src="assets/model.png" width="600"> </p>
+<p align="center"> <img src="assets/model.svg" width="600"> </p>
 
 Late Fusion consists of a 2-stream encoder in which the RGB image and the LiDAR BEV inputs are processed independently of each other. These features are then combined via element-wise summation and passed to waypoint prediction network. This is equivalent to removing the transformer modules from TransFuser.
 
