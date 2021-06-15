@@ -123,6 +123,9 @@ Spin up a CARLA server (described above) and run the required agent. The adequat
 CUDA_VISIBLE_DEVICES=0 ./leaderboard/scripts/run_evaluation.sh
 ```
 
+## CARLA Leaderboard Submission
+CARLA also has an official [Autonomous Driving Leaderboard](https://leaderboard.carla.org/) on which different models can be evaluated. Refer to the [leaderboard_submission](https://github.com/autonomousvision/transfuser/tree/leaderboard_submission) branch in this repository for building docker image and submitting to the leaderboard.
+
 ## Acknowledgements
 This implementation is based on codebase from several repositories.
 - [2020_CARLA_challenge](https://github.com/bradyz/2020_CARLA_challenge)
