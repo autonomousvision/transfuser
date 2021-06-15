@@ -1,6 +1,6 @@
 # TransFuser
 
-<p align="center"> <img src="assets/model.png"> </p>
+<p align="center"> <img src="assets/model.svg"> </p>
 
 TransFuser uses the self-attention mechanism of the transformers for image and LiDAR feature fusion at multiple resolutions.
 

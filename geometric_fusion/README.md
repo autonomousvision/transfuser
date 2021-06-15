@@ -1,6 +1,6 @@
 # Geometric Fusion
 
-<p align="center"> <img src="assets/model.png"> </p>
+<p align="center"> <img src="assets/model.svg"> </p>
 
 Geometric Fusion consists of multi-scale image-to-LiDAR and LiDAR-to-image feature projections (inspired by [ContFuse](https://openaccess.thecvf.com/content_ECCV_2018/papers/Ming_Liang_Deep_Continuous_Fusion_ECCV_2018_paper.pdf)). This is equivalent to replacing the transformers in TransFuser with geometry-based feature projections.
 

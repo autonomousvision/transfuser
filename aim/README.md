@@ -1,6 +1,6 @@
 # AIM
 
-<p align="center"> <img src="assets/model.png" width="512"> </p>
+<p align="center"> <img src="assets/model.svg" width="512"> </p>
 
 AIM consists of a ResNet34 image encoder with an autoregressive GRU-based waypoint prediction network. This is equivalent to adapting CILRS to predict waypoints conditioned on goal locations rather than predicting vehicle controls conditioned on navigational commmands.
 
