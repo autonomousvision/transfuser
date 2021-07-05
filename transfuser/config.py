@@ -6,15 +6,15 @@ class GlobalConfig:
     seq_len = 1 # input timesteps
     pred_len = 4 # future waypoints predicted
 
-    root_dir = '/is/rg/avg/aprakash/carla9-10_data/opengl/all_towns_data'
+    root_dir = '/mnt/qb/geiger/kchitta31/data_06_21'
     train_towns = ['Town01', 'Town02', 'Town03', 'Town04', 'Town06', 'Town07', 'Town10']
     val_towns = ['Town05']
     train_data, val_data = [], []
     for town in train_towns:
-        train_data.append(os.path.join(root_dir, town+'_tiny'))
-        train_data.append(os.path.join(root_dir, town+'_short'))
+        train_data.append(os.path.join(root_dir, town+''))
+        train_data.append(os.path.join(root_dir, town+'_small'))
     for town in val_towns:
-        val_data.append(os.path.join(root_dir, town+'_short'))
+        val_data.append(os.path.join(root_dir, town+''))
 
     ignore_sides = True # don't consider side cameras
     ignore_rear = True # don't consider rear cameras
