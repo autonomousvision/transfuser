@@ -54,7 +54,7 @@ class GlobalConfig:
     speed_n = 40 # buffer size
 
     max_throttle = 0.75 # upper limit on throttle signal value in dataset
-    brake_speed = 0.4 # desired speed below which brake is triggered
+    brake_speed = 0.1 # desired speed below which brake is triggered
     brake_ratio = 1.1 # ratio of speed to desired speed at which brake is triggered
     clip_delta = 0.25 # maximum change in speed input to logitudinal controller
 

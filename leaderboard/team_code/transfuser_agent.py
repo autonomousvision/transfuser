@@ -28,6 +28,7 @@ def get_entry_point():
 
 class TransFuserAgent(autonomous_agent.AutonomousAgent):
 	def setup(self, path_to_conf_file):
+		self.lidar_processed = list()
 		self.track = autonomous_agent.Track.SENSORS
 		self.config_path = path_to_conf_file
 		self.step = -1
@@ -39,7 +40,7 @@ class TransFuserAgent(autonomous_agent.AutonomousAgent):
 
 		self.config = GlobalConfig()
 		self.net = TransFuser(self.config, 'cuda')
-		self.net.load_state_dict(torch.load(os.path.join(path_to_conf_file, 'best_model.pth')))
+		self.net.load_state_dict(torch.load(os.path.join(path_to_conf_file, 'model.pth')))
 		self.net.cuda()
 		self.net.eval()
 
@@ -55,6 +56,8 @@ class TransFuserAgent(autonomous_agent.AutonomousAgent):
 			self.save_path.mkdir(parents=True, exist_ok=False)
 
 			(self.save_path / 'rgb').mkdir(parents=True, exist_ok=False)
+			(self.save_path / 'lidar_0').mkdir(parents=True, exist_ok=False)
+			(self.save_path / 'lidar_1').mkdir(parents=True, exist_ok=False)
 			(self.save_path / 'meta').mkdir(parents=True, exist_ok=False)
 
 	def _init(self):
@@ -232,24 +235,39 @@ class TransFuserAgent(autonomous_agent.AutonomousAgent):
 		self.input_buffer['thetas'].popleft()
 		self.input_buffer['thetas'].append(tick_data['compass'])
 
-		lidar_processed = list()
+		#lidar_processed = list()
 		# transform the lidar point clouds to local coordinate frame
 		ego_theta = self.input_buffer['thetas'][-1]
 		ego_x, ego_y = self.input_buffer['gps'][-1]
-		for i, lidar_point_cloud in enumerate(self.input_buffer['lidar']):
-			curr_theta = self.input_buffer['thetas'][i]
-			curr_x, curr_y = self.input_buffer['gps'][i]
-			lidar_point_cloud[:,1] *= -1 # inverts x, y
-			lidar_transformed = transform_2d_points(lidar_point_cloud,
-					np.pi/2-curr_theta, -curr_x, -curr_y, np.pi/2-ego_theta, -ego_x, -ego_y)
-			lidar_transformed = torch.from_numpy(lidar_to_histogram_features(lidar_transformed, crop=self.config.input_resolution)).unsqueeze(0)
-			lidar_processed.append(lidar_transformed.to('cuda', dtype=torch.float32))
 
-		pred_wp = self.net(self.input_buffer['rgb'] + self.input_buffer['rgb_left'] + \
-						   self.input_buffer['rgb_right']+self.input_buffer['rgb_rear'], \
-						   lidar_processed, target_point, gt_velocity)
-		steer, throttle, brake, metadata = self.net.control_pid(pred_wp, gt_velocity)
+		#Only predict every second step because we only get a LiDAR every second frame.
+		if(self.step  % 2 == 0 or self.step <= 4):
+			for i, lidar_point_cloud in enumerate(self.input_buffer['lidar']):
+				curr_theta = self.input_buffer['thetas'][i]
+				curr_x, curr_y = self.input_buffer['gps'][i]
+				lidar_point_cloud[:,1] *= -1 # inverts x, y
+				lidar_transformed = transform_2d_points(lidar_point_cloud,
+						np.pi/2-curr_theta, -curr_x, -curr_y, np.pi/2-ego_theta, -ego_x, -ego_y)
+				lidar_transformed = torch.from_numpy(lidar_to_histogram_features(lidar_transformed, crop=self.config.input_resolution)).unsqueeze(0)
+				self.lidar_processed = list()
+				self.lidar_processed.append(lidar_transformed.to('cuda', dtype=torch.float32))
+
+
+			self.pred_wp = self.net(self.input_buffer['rgb'] + self.input_buffer['rgb_left'] + \
+							   self.input_buffer['rgb_right']+self.input_buffer['rgb_rear'], \
+							   self.lidar_processed, target_point, gt_velocity)
+
+		steer, throttle, brake, metadata = self.net.control_pid(self.pred_wp, gt_velocity)
 		self.pid_metadata = metadata
+
+		# from matplotlib import pyplot as plt
+		# x = self.lidar_processed[0].cpu().numpy()[0, 0]
+		# plt.imshow(x, interpolation='nearest')
+		# plt.show()
+		# plt.imshow(self.lidar_processed[0].cpu().numpy()[0, 1], interpolation='nearest')
+		# plt.show()
+		# plt.imshow(np.transpose(self.input_buffer['rgb'][0].cpu().numpy()[0], (1, 2, 0)).astype(np.int32), interpolation='nearest')
+		# plt.show()
 
 		if brake < 0.05: brake = 0.0
 		if throttle > brake: brake = 0.0
@@ -259,15 +277,21 @@ class TransFuserAgent(autonomous_agent.AutonomousAgent):
 		control.throttle = float(throttle)
 		control.brake = float(brake)
 
-		if SAVE_PATH is not None and self.step % 10 == 0:
-			self.save(tick_data)
+		#if SAVE_PATH is not None and self.step % 1 == 0: #TODO revert
+		#	self.save(tick_data)
 
 		return control
 
 	def save(self, tick_data):
-		frame = self.step // 10
+		frame = self.step // 1 #TODO revert
+
+		from matplotlib import cm
 
 		Image.fromarray(tick_data['rgb']).save(self.save_path / 'rgb' / ('%04d.png' % frame))
+
+		Image.fromarray(cm.gist_earth(self.lidar_processed[0].cpu().numpy()[0, 0], bytes=True)).save(self.save_path / 'lidar_0' / ('%04d.png' % frame))
+		Image.fromarray(cm.gist_earth(self.lidar_processed[0].cpu().numpy()[0, 1], bytes=True)).save(self.save_path / 'lidar_1' / ('%04d.png' % frame))
+
 
 		outfile = open(self.save_path / 'meta' / ('%04d.json' % frame), 'w')
 		json.dump(self.pid_metadata, outfile, indent=4)
