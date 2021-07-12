@@ -16,6 +16,9 @@ from config import GlobalConfig
 from model import TransFuser
 from data import CARLA_Data
 
+print("Empty cuda cache", flush=True)
+torch.cuda.empty_cache()
+
 print("Parse Arguments", flush=True)
 parser = argparse.ArgumentParser()
 parser.add_argument('--id', type=str, default='transfuser', help='Unique experiment identifier.')
