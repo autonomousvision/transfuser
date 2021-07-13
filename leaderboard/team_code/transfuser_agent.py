@@ -40,7 +40,7 @@ class TransFuserAgent(autonomous_agent.AutonomousAgent):
 
 		self.config = GlobalConfig()
 		self.net = TransFuser(self.config, 'cuda')
-		self.net.load_state_dict(torch.load(os.path.join(path_to_conf_file, 'model.pth')))
+		self.net.load_state_dict(torch.load(os.path.join(path_to_conf_file, 'best_model.pth')))
 		self.net.cuda()
 		self.net.eval()
 
