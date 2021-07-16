@@ -16,7 +16,8 @@ from PIL import Image, ImageDraw
 
 SAVE_PATH = os.environ.get('SAVE_PATH', None)
 
-class AcquisitionAgent(autonomous_agent.AutonomousAgent):
+
+class BaseAgent(autonomous_agent.AutonomousAgent):
     def setup(self, path_to_conf_file):
         self.track = autonomous_agent.Track.SENSORS
         self.config_path = path_to_conf_file
