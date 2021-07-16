@@ -50,7 +50,7 @@ chmod +x setup_carla.sh
 ## Dataset
 The data is generated with ```leaderboard/team_code/auto_pilot.py``` in 8 CARLA towns using the routes and scenarios files provided at ```leaderboard/data``` on CARLA 0.9.10.1
 ```Shell
-chmod +x download_carla.sh
+chmod +x download_data.sh
 ./download_data.sh
 ```
 
