@@ -54,7 +54,7 @@ chmod +x download_data.sh
 ./download_data.sh
 ```
 
-We have provided two datasets:
+We used two datasets for different experimental settings:
 - clear_weather_data: contains only `ClearNoon` weather. This dataset is used for the experiments described in the paper and generalization to new town results shown in the [video](https://youtu.be/WxadQyQ2gMs).
 - 14_weathers_data: contains 14 preset weather conditions mentioned in ```leaderboard/team_code/auto_pilot.py```. This dataset is used for training models for the [leaderboard](https://leaderboard.carla.org/leaderboard) and the generalization to new weather results shown in the [video](https://youtu.be/WxadQyQ2gMs).
 
@@ -73,7 +73,9 @@ The dataset is structured as follows:
         - measurements: contains ego-agent's position, velocity and other metadata
 ```
 
-While our work uses only `rgb_front`, `lidar` and `measurements` data, we have provided multi-view camera data with different perception labels and affordances to facilitate development of imitation learning agents.
+We have provided two versions of the datasets used in our work:
+- Minimal dataset: contains only `rgb_front`, `lidar` and `measurements` data for the `14_weathers_data`. This is sufficient to train all the models (except LBC which also requires `topdown`).
+- Large scale dataset: contains multi-view camera data with different perception labels and affordances for both `clear_weather_data` and `14_weathers_data` to facilitate further development of imitation learning agents.
 
 ## Data Generation
 In addition to the dataset, we have also provided all the scripts used for generating data and these can be modified as required for different CARLA versions.
