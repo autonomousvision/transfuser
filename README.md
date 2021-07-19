@@ -74,8 +74,8 @@ The dataset is structured as follows:
 ```
 
 We have provided two versions of the datasets used in our work:
-- Minimal dataset: contains only `rgb_front`, `lidar` and `measurements` data for the `14_weathers_data`. This is sufficient to train all the models (except LBC which also requires `topdown`).
-- Large scale dataset: contains multi-view camera data with different perception labels and affordances for both `clear_weather_data` and `14_weathers_data` to facilitate further development of imitation learning agents.
+- Minimal dataset (63G): contains only `rgb_front`, `lidar` and `measurements` from the `14_weathers_data`. This is sufficient to train all the models (except LBC which also requires `topdown`).
+- Large scale dataset (406G): contains multi-view camera data with different perception labels and affordances for both `clear_weather_data` and `14_weathers_data` to facilitate further development of imitation learning agents.
 
 ## Data Generation
 In addition to the dataset, we have also provided all the scripts used for generating data and these can be modified as required for different CARLA versions.
