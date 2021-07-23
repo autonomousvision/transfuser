@@ -18,6 +18,8 @@ from transfuser.config import GlobalConfig
 from transfuser.data import scale_and_crop_image, lidar_to_histogram_features, transform_2d_points
 from team_code.planner import RoutePlanner
 
+import math
+
 
 SAVE_PATH = os.environ.get('SAVE_PATH', None)
 
@@ -139,6 +141,8 @@ class TransFuserAgent(autonomous_agent.AutonomousAgent):
 		gps = input_data['gps'][1][:2]
 		speed = input_data['speed'][1]['speed']
 		compass = input_data['imu'][1][-1]
+		if (math.isnan(compass) == True): #It can happen that the compass sends nan for a few frames
+			compass = 0.0
 		lidar = input_data['lidar'][1][:, :3]
 
 		result = {
