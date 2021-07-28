@@ -15,6 +15,7 @@ from config import GlobalConfig
 from model import TransFuser
 from data import CARLA_Data
 
+torch.cuda.empty_cache()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--id', type=str, default='transfuser', help='Unique experiment identifier.')
@@ -202,7 +203,6 @@ class Engine(object):
 
 # Config
 config = GlobalConfig()
-
 
 # Data
 train_set = CARLA_Data(root=config.train_data, config=config)

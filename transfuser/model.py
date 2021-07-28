@@ -481,13 +481,15 @@ class TransFuser(nn.Module):
         waypoints[:,1] *= -1
         speed = velocity[0].data.cpu().numpy()
 
-        aim = (waypoints[1] + waypoints[0]) / 2.0
-        angle = np.degrees(np.pi / 2 - np.arctan2(aim[1], aim[0])) / 90
-        steer = self.turn_controller.step(angle)
-        steer = np.clip(steer, -1.0, 1.0)
-
         desired_speed = np.linalg.norm(waypoints[0] - waypoints[1]) * 2.0
         brake = desired_speed < self.config.brake_speed or (speed / desired_speed) > self.config.brake_ratio
+
+        aim = (waypoints[1] + waypoints[0]) / 2.0
+        angle = np.degrees(np.pi / 2 - np.arctan2(aim[1], aim[0])) / 90
+        if(speed < 0.01):
+            angle = np.array(0.0) # When we don't move we don't want the angle error to accumulate in the integral
+        steer = self.turn_controller.step(angle)
+        steer = np.clip(steer, -1.0, 1.0)
 
         delta = np.clip(desired_speed - speed, 0.0, self.config.clip_delta)
         throttle = self.speed_controller.step(delta)
