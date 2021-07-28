@@ -14,6 +14,15 @@ This repository contains the code for the CVPR 2021 paper [Multi-Modal Fusion Tr
 }
 ```
 
+## Contents
+1. [Setup](#setup)
+2. [Dataset](#dataset)
+3. [Data Generation](#data-generation)
+4. [Training](#training)
+5. [Evaluation](#evaluation)
+6. [CARLA Leaderboard Submission](#carla-leaderboard-submission)
+7. [Acknowledgements](#acknowledgements)
+
 ## Setup
 Install anaconda
 ```Shell
@@ -38,8 +47,38 @@ chmod +x setup_carla.sh
 ./setup_carla.sh
 ```
 
+## Dataset
+The data is generated with ```leaderboard/team_code/auto_pilot.py``` in 8 CARLA towns using the routes and scenarios files provided at ```leaderboard/data``` on CARLA 0.9.10.1
+```Shell
+chmod +x download_data.sh
+./download_data.sh
+```
+
+We used two datasets for different experimental settings:
+- clear_weather_data: contains only `ClearNoon` weather. This dataset is used for the experiments described in the paper and generalization to new town results shown in the [video](https://youtu.be/WxadQyQ2gMs).
+- 14_weathers_data: contains 14 preset weather conditions mentioned in ```leaderboard/team_code/auto_pilot.py```. This dataset is used for training models for the [leaderboard](https://leaderboard.carla.org/leaderboard) and the generalization to new weather results shown in the [video](https://youtu.be/WxadQyQ2gMs).
+
+The dataset is structured as follows:
+```
+- TownX_{tiny,small,long}: corresponding to different towns and routes files
+    - routes_X: contains data for an individual route
+        - rgb_{front, left, right, rear}: multi-view camera images at 400x300 resolution
+        - seg_{front, left, right, rear}: corresponding segmentation images
+        - depth_{front, left, right, rear}: corresponding depth images
+        - lidar: 3d point cloud in .npy format
+        - topdown: topdown segmentation images required for training LBC
+        - 2d_bbs_{front, left, right, rear}: 2d bounding boxes for different agents in the corresponding camera view
+        - 3d_bbs: 3d bounding boxes for different agents
+        - affordances: different types of affordances
+        - measurements: contains ego-agent's position, velocity and other metadata
+```
+
+We have provided two versions of the datasets used in our work:
+- Minimal dataset (63G): contains only `rgb_front`, `lidar` and `measurements` from the `14_weathers_data`. This is sufficient to train all the models (except LBC which also requires `topdown`).
+- Large scale dataset (406G): contains multi-view camera data with different perception labels and affordances for both `clear_weather_data` and `14_weathers_data` to facilitate further development of imitation learning agents.
+
 ## Data Generation
-The training data is generated using ```leaderboard/team_code/auto_pilot.py``` in 8 CARLA towns and 14 weather conditions. The routes and scenarios files to be used for data generation are provided at ```leaderboard/data```.
+In addition to the dataset, we have also provided all the scripts used for generating data and these can be modified as required for different CARLA versions.
 
 ### Running CARLA Server
 

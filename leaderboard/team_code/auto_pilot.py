@@ -14,9 +14,6 @@ from team_code.map_agent import MapAgent
 from team_code.pid_controller import PIDController
 
 
-SAVE_PATH = os.environ.get('SAVE_PATH', None)
-
-
 WEATHERS = {
         'ClearNoon': carla.WeatherParameters.ClearNoon,
         'ClearSunset': carla.WeatherParameters.ClearSunset,
@@ -97,25 +94,6 @@ class AutoPilot(MapAgent):
 
     def setup(self, path_to_conf_file):
         super().setup(path_to_conf_file)
-        self.weather_id = None
-
-        if SAVE_PATH is not None:
-            now = datetime.datetime.now()
-            string = pathlib.Path(os.environ['ROUTES']).stem + '_'
-            string += '_'.join(map(lambda x: '%02d' % x, (now.month, now.day, now.hour, now.minute, now.second)))
-
-            print(string)
-
-            self.save_path = pathlib.Path(os.environ['SAVE_PATH']) / string
-            self.save_path.mkdir(parents=True, exist_ok=True)
-
-            for sensor in self.sensors():
-                if 'camera' in sensor['type'] or 'lidar' in sensor['type']:   
-                    if 'map' not in sensor['id']:
-                        (self.save_path / sensor['id']).mkdir(parents=True, exist_ok=True)
-            (self.save_path / 'measurements').mkdir(parents=True, exist_ok=True)
-            (self.save_path / 'topdown').mkdir(parents=True, exist_ok=True)
-
             
     def _init(self):
         super()._init()
@@ -377,38 +355,4 @@ class AutoPilot(MapAgent):
             return target_vehicle
 
         return None
-
-    def save(self, far_node, near_command, steer, throttle, brake, target_speed, tick_data):
-        frame = self.step // 10
-
-        pos = self._get_position(tick_data)
-        theta = tick_data['compass']
-        speed = tick_data['speed']
-
-        data = {
-                'x': pos[0],
-                'y': pos[1],
-                'theta': theta,
-                'speed': speed,
-                'target_speed': target_speed,
-                'x_command': far_node[0],
-                'y_command': far_node[1],
-                'command': near_command.value,
-                'steer': steer,
-                'throttle': throttle,
-                'brake': brake,
-                'weather': self.weather_id,
-                }
-
-        for sensor in self.sensors():
-            if 'camera' in sensor['type'] and 'map' not in sensor['id']:
-                Image.fromarray(tick_data[sensor['id']]).save(self.save_path / sensor['id'] / ('%04d.png' % frame))
-            elif 'lidar' in sensor['type']:
-                np.save(self.save_path / 'lidar' / ('%04d.npy' % frame), tick_data['lidar'], allow_pickle=True)
-
-        Image.fromarray(tick_data['topdown']).save(self.save_path / 'topdown' / ('%04d.png' % frame))
-        measurements_file = self.save_path / 'measurements' / ('%04d.json' % frame)
-        f = open(measurements_file, 'w')
-        json.dump(data, f, indent=4)
-        f.close()
         
