@@ -37,12 +37,7 @@ class CARLA_Data(Dataset):
         self.velocity = []
         
         for sub_root in tqdm(root, file=sys.stdout):
-            print("Preload subroot", flush=True)
-            town = os.path.basename(os.path.normpath(sub_root))
-            print("Town: ", town, flush=True)
-            writefolder = '/mnt/qb/geiger/bjaeger25' #Workaround since I don't have write permissions in the dataset folder
-            preload_file = os.path.join(writefolder, str(town) + '_rg_lidar_diag_pl_'+str(self.seq_len)+'_'+str(self.pred_len)+'.npy')
-            print("Preload_file: ", preload_file, flush=True)
+            preload_file = os.path.join(sub_root, 'rg_lidar_diag_pl_'+str(self.seq_len)+'_'+str(self.pred_len)+'.npy')
 
             # dump to npy if no preload
             if not os.path.exists(preload_file):
