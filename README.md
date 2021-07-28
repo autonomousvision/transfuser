@@ -149,7 +149,7 @@ unzip model_ckpt/models.zip -d model_ckpt/
 rm model_ckpt/models.zip
 ```
 
-Note that we have updated the pretrained transfuser model with the checkpoint submitted to the leaderboard. This model is trained on a different dataset than the one provided in this repository. (We are currently unable to share the entire dataset due to some issues.) 
+Note that we have updated the pretrained TransFuser model with the improved checkpoint submitted to the leaderboard. This model contains multiple bug fixes and is trained on a different dataset than the one provided in this repository. (We are currently unable to share the entire dataset due to some issues.) 
 
 - [CILRS](cilrs)
 - [LBC](https://github.com/bradyz/2020_CARLA_challenge)
