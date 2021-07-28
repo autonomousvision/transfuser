@@ -46,7 +46,6 @@ class CARLA_Data(Dataset):
 
             # dump to npy if no preload
             if not os.path.exists(preload_file):
-                print("File doesn't exist create it.", flush=True)
                 preload_front = []
                 preload_left = []
                 preload_right = []
@@ -66,9 +65,9 @@ class CARLA_Data(Dataset):
                 # list sub-directories in root 
                 root_files = os.listdir(sub_root)
                 routes = [folder for folder in root_files if not os.path.isfile(os.path.join(sub_root,folder))]
-                for route in tqdm(routes, file=sys.stdout):
+                for route in routes:
                     route_dir = os.path.join(sub_root, route)
-                    print(route_dir, flush=True)
+                    print(route_dir)
                     # subtract final frames (pred_len) since there are no future waypoints
                     # first frame of sequence not used
                     
@@ -155,9 +154,7 @@ class CARLA_Data(Dataset):
                 preload_dict['brake'] = preload_brake
                 preload_dict['command'] = preload_command
                 preload_dict['velocity'] = preload_velocity
-                print("Try to save preload file", flush=True)
                 np.save(preload_file, preload_dict)
-                print("Done saving preload file", flush=True)
 
             # load from npy if available
             preload_dict = np.load(preload_file, allow_pickle=True)

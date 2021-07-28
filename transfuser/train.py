@@ -1,4 +1,3 @@
-print("Load imports", flush=True)
 import argparse
 import json
 import os
@@ -16,10 +15,8 @@ from config import GlobalConfig
 from model import TransFuser
 from data import CARLA_Data
 
-print("Empty cuda cache", flush=True)
 torch.cuda.empty_cache()
 
-print("Parse Arguments", flush=True)
 parser = argparse.ArgumentParser()
 parser.add_argument('--id', type=str, default='transfuser', help='Unique experiment identifier.')
 parser.add_argument('--device', type=str, default='cuda', help='Device to use')
@@ -32,11 +29,9 @@ parser.add_argument('--logdir', type=str, default='log', help='Directory to log 
 args = parser.parse_args()
 args.logdir = os.path.join(args.logdir, args.id)
 
-print("Create summary writer", flush=True)
 writer = SummaryWriter(log_dir=args.logdir)
 
 
-print("Create engine class", flush=True)
 class Engine(object):
 	"""Engine that runs training and inference.
 	Args
@@ -162,7 +157,6 @@ class Engine(object):
 				wp_epoch += float(F.l1_loss(pred_wp, gt_waypoints, reduction='none').mean())
 
 				num_batches += 1
-			
 					
 			wp_loss = wp_epoch / float(num_batches)
 			tqdm.write(f'Epoch {self.cur_epoch:03d}, Batch {batch_num:03d}:' + f' Wp: {wp_loss:3.3f}')
@@ -208,29 +202,20 @@ class Engine(object):
 			tqdm.write('====== Overwrote best model ======>')
 
 # Config
-print("Creating config", flush=True)
 config = GlobalConfig()
 
-print("Starting to create training dataset", flush=True)
 # Data
 train_set = CARLA_Data(root=config.train_data, config=config)
-print("Starting to create validation dataset", flush=True)
 val_set = CARLA_Data(root=config.val_data, config=config)
 
-print("Starting to create train dataloader", flush=True)
 dataloader_train = DataLoader(train_set, batch_size=args.batch_size, shuffle=True, num_workers=8, pin_memory=True)
-print("Starting to create val dataloader", flush=True)
 dataloader_val = DataLoader(val_set, batch_size=args.batch_size, shuffle=False, num_workers=8, pin_memory=True)
 
-print("Creating model", flush=True)
 # Model
 model = TransFuser(config, args.device)
-print("Creating optimizer", flush=True)
 optimizer = optim.AdamW(model.parameters(), lr=args.lr)
-print("Creating engine", flush=True)
 trainer = Engine()
 
-print("Determine trainable parameters", flush=True)
 model_parameters = filter(lambda p: p.requires_grad, model.parameters())
 params = sum([np.prod(p.size()) for p in model_parameters])
 print ('Total trainable parameters: ', params)
@@ -255,12 +240,10 @@ elif os.path.isfile(os.path.join(args.logdir, 'recent.log')):
 	model.load_state_dict(torch.load(os.path.join(args.logdir, 'model.pth')))
 	optimizer.load_state_dict(torch.load(os.path.join(args.logdir, 'recent_optim.pth')))
 
-print("Log arguments", flush=True)
 # Log args
 with open(os.path.join(args.logdir, 'args.txt'), 'w') as f:
 	json.dump(args.__dict__, f, indent=2)
 
-print("Start training", flush=True)
 for epoch in range(trainer.cur_epoch, args.epochs): 
 	trainer.train()
 	if epoch % args.val_every == 0: 

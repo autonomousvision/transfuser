@@ -19,7 +19,7 @@ from transfuser.data import scale_and_crop_image, lidar_to_histogram_features, t
 from team_code.planner import RoutePlanner
 
 import math
-
+from matplotlib import cm
 
 SAVE_PATH = os.environ.get('SAVE_PATH', None)
 
@@ -239,7 +239,6 @@ class TransFuserAgent(autonomous_agent.AutonomousAgent):
 		self.input_buffer['thetas'].popleft()
 		self.input_buffer['thetas'].append(tick_data['compass'])
 
-		#lidar_processed = list()
 		# transform the lidar point clouds to local coordinate frame
 		ego_theta = self.input_buffer['thetas'][-1]
 		ego_x, ego_y = self.input_buffer['gps'][-1]
@@ -264,15 +263,6 @@ class TransFuserAgent(autonomous_agent.AutonomousAgent):
 		steer, throttle, brake, metadata = self.net.control_pid(self.pred_wp, gt_velocity)
 		self.pid_metadata = metadata
 
-		# from matplotlib import pyplot as plt
-		# x = self.lidar_processed[0].cpu().numpy()[0, 0]
-		# plt.imshow(x, interpolation='nearest')
-		# plt.show()
-		# plt.imshow(self.lidar_processed[0].cpu().numpy()[0, 1], interpolation='nearest')
-		# plt.show()
-		# plt.imshow(np.transpose(self.input_buffer['rgb'][0].cpu().numpy()[0], (1, 2, 0)).astype(np.int32), interpolation='nearest')
-		# plt.show()
-
 		if brake < 0.05: brake = 0.0
 		if throttle > brake: brake = 0.0
 
@@ -281,15 +271,13 @@ class TransFuserAgent(autonomous_agent.AutonomousAgent):
 		control.throttle = float(throttle)
 		control.brake = float(brake)
 
-		#if SAVE_PATH is not None and self.step % 1 == 0: #TODO revert
-		#	self.save(tick_data)
+		if SAVE_PATH is not None and self.step % 10 == 0:
+			self.save(tick_data)
 
 		return control
 
 	def save(self, tick_data):
-		frame = self.step // 1 #TODO revert
-
-		from matplotlib import cm
+		frame = self.step // 10
 
 		Image.fromarray(tick_data['rgb']).save(self.save_path / 'rgb' / ('%04d.png' % frame))
 
