@@ -60,7 +60,7 @@ We used two datasets for different experimental settings:
 
 The dataset is structured as follows:
 ```
-- TownX_{tiny,small,long}: corresponding to different towns and routes files
+- TownX_{tiny,short,long}: corresponding to different towns and routes files
     - routes_X: contains data for an individual route
         - rgb_{front, left, right, rear}: multi-view camera images at 400x300 resolution
         - seg_{front, left, right, rear}: corresponding segmentation images
@@ -148,6 +148,8 @@ wget https://s3.eu-central-1.amazonaws.com/avg-projects/transfuser/models.zip -P
 unzip model_ckpt/models.zip -d model_ckpt/
 rm model_ckpt/models.zip
 ```
+
+Note that we have updated the pretrained transfuser model with the checkpoint submitted to the leaderboard. This model is trained on a different dataset than the one provided in this repository. (We are currently unable to share the entire dataset due to some issues.) 
 
 - [CILRS](cilrs)
 - [LBC](https://github.com/bradyz/2020_CARLA_challenge)
