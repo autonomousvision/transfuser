@@ -16,6 +16,13 @@ class GlobalConfig:
     for town in val_towns:
         val_data.append(os.path.join(root_dir, town+'_short'))
 
+    # visualizing transformer attention maps
+    viz_root = '/mnt/qb/geiger/kchitta31/data_06_21'
+    viz_towns = ['Town05_tiny']
+    viz_data = []
+    for town in viz_towns:
+        viz_data.append(os.path.join(viz_root, town))
+
     ignore_sides = True # don't consider side cameras
     ignore_rear = True # don't consider rear cameras
     n_views = 1 # no. of camera views
