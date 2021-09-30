@@ -186,6 +186,11 @@ class AutoPilot(MapAgent):
         walker = self._is_walker_hazard(actors.filter('*walker*'))
         stop_sign = self._is_stop_sign_hazard(actors.filter('*stop*'))
 
+        self.is_vehicle_present = 1 if vehicle is not None else 0
+		self.is_red_light_present = 1 if light is not None else 0
+		self.is_pedestrian_present = 1 if walker is not None else 0
+		self.is_stop_sign_present = 1 if stop_sign is not None else 0
+
         return any(x is not None for x in [vehicle, light, walker, stop_sign])
 
     def _point_inside_boundingbox(self, point, bb_center, bb_extent):
