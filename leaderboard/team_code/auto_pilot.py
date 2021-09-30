@@ -174,7 +174,7 @@ class AutoPilot(MapAgent):
         control.brake = float(brake)
 
         if self.step % 10 == 0 and self.save_path is not None:
-            self.save(far_node, near_command, steer, throttle, brake, target_speed, data)
+            self.save(near_node, far_node, near_command, steer, throttle, brake, target_speed, data)
 
         return control
 
