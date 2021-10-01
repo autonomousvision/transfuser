@@ -137,7 +137,13 @@ class AutoPilot(MapAgent):
         target_speed = 4.0 if should_slow else 7.0
         brake = self._should_brake()
         target_speed = target_speed if not brake else 0.0
-
+        
+        self.should_slow = int(should_slow)
+        self.should_brake = int(brake)
+        self.angle = angle
+        self.angle_unnorm = angle_unnorm
+        self.angle_far_unnorm = angle_far_unnorm
+        
         delta = np.clip(target_speed - speed, 0.0, 0.25)
         throttle = self._speed_controller.step(delta)
         throttle = np.clip(throttle, 0.0, 0.75)
@@ -187,9 +193,9 @@ class AutoPilot(MapAgent):
         stop_sign = self._is_stop_sign_hazard(actors.filter('*stop*'))
 
         self.is_vehicle_present = 1 if vehicle is not None else 0
-		self.is_red_light_present = 1 if light is not None else 0
-		self.is_pedestrian_present = 1 if walker is not None else 0
-		self.is_stop_sign_present = 1 if stop_sign is not None else 0
+        self.is_red_light_present = 1 if light is not None else 0
+        self.is_pedestrian_present = 1 if walker is not None else 0
+        self.is_stop_sign_present = 1 if stop_sign is not None else 0
 
         return any(x is not None for x in [vehicle, light, walker, stop_sign])
 
