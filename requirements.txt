@@ -92,8 +92,8 @@ subprocess32==3.5.4
 tensorboard==2.1.1
 terminado==0.8.3
 testpath==0.4.4
-torch==1.4.0
-torchvision==0.5.0
+torch==1.9.0
+torchvision==0.10.0
 tornado==6.0.4
 tqdm==4.43.0
 traitlets==4.3.3
