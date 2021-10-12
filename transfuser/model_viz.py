@@ -443,7 +443,7 @@ class TransFuser(nn.Module):
             target_point (tensor): goal location registered to ego-frame
             velocity (tensor): input velocity from speedometer
         '''
-        fused_features = self.encoder(image_list, lidar_list, velocity)
+        fused_features, attn_map = self.encoder(image_list, lidar_list, velocity)
         z = self.join(fused_features)
 
         output_wp = list()
@@ -462,7 +462,7 @@ class TransFuser(nn.Module):
 
         pred_wp = torch.stack(output_wp, dim=1)
 
-        return pred_wp
+        return pred_wp, attn_map
 
     def control_pid(self, waypoints, velocity):
         ''' 
