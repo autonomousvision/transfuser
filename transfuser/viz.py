@@ -10,7 +10,7 @@ torch.backends.cudnn.benchmark = True
 
 from config import GlobalConfig
 from model_viz import TransFuser
-from data import CARLA_Data
+from data_viz import CARLA_Data
 
 
 parser = argparse.ArgumentParser()
