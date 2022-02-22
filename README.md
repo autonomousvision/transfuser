@@ -37,8 +37,8 @@ Clone the repo and build the environment
 git clone https://github.com/autonomousvision/transfuser
 cd transfuser
 conda create -n transfuser python=3.7
-pip3 install -r requirements.txt
 conda activate transfuser
+pip3 install -r requirements.txt
 ```
 
 Download and setup CARLA 0.9.10.1
