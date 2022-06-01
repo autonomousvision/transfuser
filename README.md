@@ -1,5 +1,7 @@
 # Multi-Modal Fusion Transformer for End-to-End Autonomous Driving
 
+### Update (06/2022): We have released an [extension to the original TransFuser CVPR paper on Arxiv](https://arxiv.org/abs/2205.15997). The code for this updated version will be released on the ["2022" branch](https://github.com/autonomousvision/transfuser/tree/2022).
+
 ## [Project Page](https://ap229997.github.io/projects/transfuser/) | [Paper](https://arxiv.org/pdf/2104.09224.pdf) | [Supplementary](http://www.cvlibs.net/publications/Prakash2021CVPR_supplementary.pdf) | [Video](https://youtu.be/WxadQyQ2gMs) | [Poster](https://ap229997.github.io/projects/transfuser/assets/poster.pdf) | [Blog](https://autonomousvision.github.io/transfuser)
 
 <img src="transfuser/assets/teaser.svg" height="192" hspace=30> <img src="transfuser/assets/full_arch.svg" width="400">
