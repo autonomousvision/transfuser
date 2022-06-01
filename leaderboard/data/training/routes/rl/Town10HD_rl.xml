@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<routes>
+  <route id="0" town="Town10HD">
+    <waypoint x="106.479805" y="-22.654198" z="0.000000" pitch="0.0" roll="0.0" yaw="-89.155151"/>
+    <waypoint x="79.240005" y="-65.699600" z="0.000000" pitch="0.0" roll="0.0" yaw="-161.842422"/>
+    <waypoint x="27.811243" y="-64.408333" z="0.000000" pitch="0.0" roll="0.0" yaw="179.976578"/>
+  </route>
+  <route id="1" town="Town10HD">
+    <waypoint x="7.411115" y="-60.900002" z="0.000000" pitch="0.0" roll="0.0" yaw="359.976562"/>
+    <waypoint x="57.412540" y="-57.420425" z="0.000000" pitch="0.0" roll="0.0" yaw="359.976562"/>
+    <waypoint x="98.321304" y="-41.413155" z="0.000000" pitch="0.0" roll="0.0" yaw="61.186172"/>
+  </route>
+  <route id="2" town="Town10HD">
+    <waypoint x="-0.190755" y="137.209961" z="0.000000" pitch="0.0" roll="0.0" yaw="0.352119"/>
+    <waypoint x="49.788311" y="141.130264" z="0.000000" pitch="0.0" roll="0.0" yaw="0.320448"/>
+    <waypoint x="96.104416" y="121.452866" z="0.000000" pitch="0.0" roll="0.0" yaw="-53.992123"/>
+  </route>
+  <route id="3" town="Town10HD">
+    <waypoint x="-27.800329" y="-61.284046" z="0.000000" pitch="0.0" roll="0.0" yaw="0.596735"/>
+    <waypoint x="22.218863" y="-57.406048" z="0.000000" pitch="0.0" roll="0.0" yaw="359.976562"/>
+    <waypoint x="71.877014" y="-60.348789" z="0.000000" pitch="0.0" roll="0.0" yaw="10.023529"/>
+  </route>
+  <route id="4" town="Town10HD">
+    <waypoint x="106.396484" y="-4.449376" z="0.000000" pitch="0.0" roll="0.0" yaw="-89.609253"/>
+    <waypoint x="96.705452" y="-55.038555" z="0.000000" pitch="0.0" roll="0.0" yaw="-135.357162"/>
+    <waypoint x="46.029888" y="-64.415779" z="0.000000" pitch="0.0" roll="0.0" yaw="179.976578"/>
+  </route>
+  <route id="5" town="Town10HD">
+    <waypoint x="19.350212" y="137.459961" z="0.000000" pitch="0.0" roll="0.0" yaw="0.320448"/>
+    <waypoint x="69.994003" y="140.898361" z="0.000000" pitch="0.0" roll="0.0" yaw="-7.068633"/>
+    <waypoint x="104.445442" y="103.155632" z="0.000000" pitch="0.0" roll="0.0" yaw="-76.994919"/>
+  </route>
+  <route id="6" town="Town10HD">
+    <waypoint x="102.300583" y="82.914726" z="0.000000" pitch="0.0" roll="0.0" yaw="90.390747"/>
+    <waypoint x="84.219009" y="123.954063" z="0.000000" pitch="0.0" roll="0.0" yaw="141.460510"/>
+    <waypoint x="39.299477" y="134.071487" z="0.000000" pitch="0.0" roll="0.0" yaw="180.320450"/>
+  </route>
+  <route id="7" town="Town10HD">
+    <waypoint x="-28.560221" y="137.035614" z="0.000000" pitch="0.0" roll="0.0" yaw="0.352127"/>
+    <waypoint x="21.418753" y="140.971588" z="0.000000" pitch="0.0" roll="0.0" yaw="0.320448"/>
+    <waypoint x="71.726570" y="137.093262" z="0.000000" pitch="0.0" roll="0.0" yaw="-10.365965"/>
+  </route>
+  <route id="8" town="Town10HD">
+    <waypoint x="106.429962" y="-9.358066" z="0.000000" pitch="0.0" roll="0.0" yaw="-89.609253"/>
+    <waypoint x="92.515091" y="-58.690834" z="0.000000" pitch="0.0" roll="0.0" yaw="-142.492691"/>
+    <waypoint x="41.121502" y="-64.413773" z="0.000000" pitch="0.0" roll="0.0" yaw="179.976578"/>
+  </route>
+  <route id="9" town="Town10HD">
+    <waypoint x="-5.338221" y="-61.050095" z="0.000000" pitch="0.0" roll="0.0" yaw="0.596741"/>
+    <waypoint x="44.681526" y="-57.415226" z="0.000000" pitch="0.0" roll="0.0" yaw="359.976562"/>
+    <waypoint x="90.852585" y="-50.949448" z="0.000000" pitch="0.0" roll="0.0" yaw="42.678528"/>
+  </route>
+  <route id="10" town="Town10HD">
+    <waypoint x="-71.269684" y="132.314896" z="0.000000" pitch="0.0" roll="0.0" yaw="-167.127121"/>
+    <waypoint x="-100.387123" y="98.446709" z="0.000000" pitch="0.0" roll="0.0" yaw="250.746368"/>
+    <waypoint x="-107.308868" y="50.649052" z="0.000000" pitch="0.0" roll="0.0" yaw="-89.357765"/>
+  </route>
+  <route id="11" town="Town10HD">
+    <waypoint x="-110.732994" y="43.860245" z="0.000000" pitch="0.0" roll="0.0" yaw="90.642235"/>
+    <waypoint x="-112.363022" y="94.966545" z="0.000000" pitch="0.0" roll="0.0" yaw="436.151855"/>
+    <waypoint x="-78.748825" y="133.618118" z="0.000000" pitch="0.0" roll="0.0" yaw="22.072830"/>
+  </route>
+</routes>

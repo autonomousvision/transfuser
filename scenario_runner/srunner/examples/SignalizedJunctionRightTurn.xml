@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<scenarios>
+    <scenario name="SignalizedJunctionRightTurn_1" type="SignalizedJunctionRightTurn" town="Town03">
+        <ego_vehicle x="53" y="128.1" z="1" yaw="178" model="vehicle.lincoln.mkz2017" />
+        <other_actor x="6" y="171" z="1" yaw="-90" model="vehicle.tesla.model3" />
+    </scenario>
+    <scenario name="SignalizedJunctionRightTurn_2" type="SignalizedJunctionRightTurn" town="Town04">
+        <ego_vehicle x="244.7" y="-249.4" z="1" yaw="180" model="vehicle.lincoln.mkz2017" />
+        <other_actor x="202.7" y="-217" z="1" yaw="-89" model="vehicle.tesla.model3" />
+    </scenario>
+    <scenario name="SignalizedJunctionRightTurn_3" type="SignalizedJunctionRightTurn" town="Town04">
+        <ego_vehicle x="250" y="-311" z="0.1" yaw="-179" model="vehicle.lincoln.mkz2017" />
+        <other_actor x="204.4" y="-290" z="0.1" yaw="-89" model="vehicle.tesla.model3" />
+    </scenario>
+    <scenario name="SignalizedJunctionRightTurn_4" type="SignalizedJunctionRightTurn" town="Town05">
+        <ego_vehicle x="-50.4" y="25.3" z="0.1" yaw="92" model="vehicle.lincoln.mkz2017" />
+        <other_actor x="-10" y="84.4" z="0.1" yaw="179" model="vehicle.tesla.model3" />
+    </scenario>
+    <scenario name="SignalizedJunctionRightTurn_5" type="SignalizedJunctionRightTurn" town="Town05">
+        <ego_vehicle x="-25.7" y="95" z="0.0" yaw="1" model="vehicle.lincoln.mkz2017" />
+        <other_actor x="28" y="60" z="0.0" yaw="91" model="vehicle.tesla.model3" />
+    </scenario>
+    <scenario name="SignalizedJunctionRightTurn_6" type="SignalizedJunctionRightTurn" town="Town05">
+        <ego_vehicle x="72.2" y="-92.6" z="0.0" yaw="-163" model="vehicle.lincoln.mkz2017" />
+        <other_actor x="35.5" y="-50" z="0.0" yaw="270" model="vehicle.tesla.model3" />
+    </scenario>
+    <scenario name="SignalizedJunctionRightTurn_7" type="SignalizedJunctionRightTurn" town="Town05">
+        <ego_vehicle x="-175.3" y="94.9" z="0.0" yaw="0" model="vehicle.lincoln.mkz2017" />
+        <other_actor x="-131.6" y="70" z="0.0" yaw="90" model="vehicle.tesla.model3" />
+    </scenario>
+</scenarios>

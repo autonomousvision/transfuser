@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<routes>
+  <route id="8" town="Town10HD">
+    <waypoint x="-91.082436" y="-50.215195" z="0.0" pitch="0.0" roll="0.0" yaw="-43.238659"/>
+    <waypoint x="2.132729" y="-57.443878" z="0.0" pitch="0.0" roll="0.0" yaw="0.914963"/>
+  </route>
+  <route id="9" town="Town10HD">
+    <waypoint x="-93.480072" y="-52.764969" z="0.0" pitch="0.0" roll="0.0" yaw="-43.238659"/>
+    <waypoint x="2.188618" y="-60.943428" z="0.0" pitch="0.0" roll="0.0" yaw="0.914963"/>
+  </route>
+  <route id="10" town="Town10HD">
+    <waypoint x="-32.123825" y="65.543671" z="0.0" pitch="0.0" roll="0.0" yaw="196.086929"/>
+    <waypoint x="-41.730820" y="-31.649328" z="0.0" pitch="0.0" roll="0.0" yaw="270.432312"/>
+  </route>
+  <route id="11" town="Town10HD">
+    <waypoint x="-45.102341" y="72.545319" z="0.0" pitch="0.0" roll="0.0" yaw="-90.161232"/>
+    <waypoint x="-45.230721" y="-31.675737" z="0.0" pitch="0.0" roll="0.0" yaw="270.432312"/>
+  </route>
+  <route id="12" town="Town10HD">
+    <waypoint x="-48.730621" y="-31.702147" z="0.0" pitch="0.0" roll="0.0" yaw="90.432320"/>
+    <waypoint x="-48.602325" y="72.555161" z="0.0" pitch="0.0" roll="0.0" yaw="89.838768"/>
+  </route>
+  <route id="13" town="Town10HD">
+    <waypoint x="-52.230522" y="-31.728556" z="0.0" pitch="0.0" roll="0.0" yaw="90.432320"/>
+    <waypoint x="-52.102314" y="72.565010" z="0.0" pitch="0.0" roll="0.0" yaw="89.838768"/>
+  </route>
+  <route id="20" town="Town10HD">
+    <waypoint x="1.305816" y="16.687620" z="0.0" pitch="0.0" roll="0.0" yaw="180.159195"/>
+    <waypoint x="-96.866066" y="16.426058" z="0.0" pitch="0.0" roll="0.0" yaw="178.117523"/>
+  </route>
+  <route id="21" town="Town10HD">
+    <waypoint x="1.315541" y="13.187634" z="0.0" pitch="0.0" roll="0.0" yaw="180.159195"/>
+    <waypoint x="-95.868332" y="11.656296" z="0.0" pitch="0.0" roll="0.0" yaw="-155.523438"/>
+  </route>
+  <route id="22" town="Town10HD">
+    <waypoint x="-95.885857" y="29.156734" z="0.0" pitch="0.0" roll="0.0" yaw="-25.066387"/>
+    <waypoint x="1.273863" y="28.187574" z="0.0" pitch="0.0" roll="0.0" yaw="0.159198"/>
+  </route>
+  <route id="23" town="Town10HD">
+    <waypoint x="-96.509850" y="24.597876" z="0.0" pitch="0.0" roll="0.0" yaw="-9.866088"/>
+    <waypoint x="1.283588" y="24.687588" z="0.0" pitch="0.0" roll="0.0" yaw="0.159198"/>
+  </route>
+  <route id="28" town="Town10HD">
+    <waypoint x="-97.611725" y="118.924660" z="0.0" pitch="0.0" roll="0.0" yaw="53.761551"/>
+    <waypoint x="1.438935" y="137.220001" z="0.0" pitch="0.0" roll="0.0" yaw="0.361259"/>
+  </route>
+  <route id="29" town="Town10HD">
+    <waypoint x="-100.434700" y="120.993675" z="0.0" pitch="0.0" roll="0.0" yaw="53.761551"/>
+    <waypoint x="1.416867" y="140.719925" z="0.0" pitch="0.0" roll="0.0" yaw="0.361259"/>
+  </route>
+  <route id="40" town="Town10HD">
+    <waypoint x="109.373734" y="72.212715" z="0.0" pitch="0.0" roll="0.0" yaw="-449.609222"/>
+    <waypoint x="108.192970" y="-35.783134" z="0.0" pitch="0.0" roll="0.0" yaw="-106.282242"/>
+  </route>
+  <route id="41" town="Town10HD">
+    <waypoint x="105.873817" y="72.188843" z="0.0" pitch="0.0" roll="0.0" yaw="-449.609222"/>
+    <waypoint x="104.833344" y="-34.801842" z="0.0" pitch="0.0" roll="0.0" yaw="-106.282242"/>
+  </route>
+  <route id="42" town="Town10HD">
+    <waypoint x="101.473724" y="-33.820549" z="0.0" pitch="0.0" roll="0.0" yaw="73.717758"/>
+    <waypoint x="102.373894" y="72.164978" z="0.0" pitch="0.0" roll="0.0" yaw="-269.609222"/>
+  </route>
+  <route id="43" town="Town10HD">
+    <waypoint x="98.114098" y="-32.839256" z="0.0" pitch="0.0" roll="0.0" yaw="73.717758"/>
+    <waypoint x="98.873978" y="72.141106" z="0.0" pitch="0.0" roll="0.0" yaw="-269.609222"/>
+  </route>
+  <route id="49" town="Town10HD">
+    <waypoint x="-108.698837" y="-32.573845" z="0.0" pitch="0.0" roll="0.0" yaw="103.397835"/>
+    <waypoint x="-111.069267" y="73.858360" z="0.0" pitch="0.0" roll="0.0" yaw="90.642235"/>
+  </route>
+  <route id="50" town="Town10HD">
+    <waypoint x="-112.103584" y="-33.384834" z="0.0" pitch="0.0" roll="0.0" yaw="103.397835"/>
+    <waypoint x="-114.569046" y="73.819130" z="0.0" pitch="0.0" roll="0.0" yaw="90.642235"/>
+  </route>
+  <route id="51" town="Town10HD">
+    <waypoint x="-107.569481" y="73.897591" z="0.0" pitch="0.0" roll="0.0" yaw="-89.357765"/>
+    <waypoint x="-105.294098" y="-31.762856" z="0.0" pitch="0.0" roll="0.0" yaw="-76.602165"/>
+  </route>
+</routes>

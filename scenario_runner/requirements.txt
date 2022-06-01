@@ -1,0 +1,12 @@
+py-trees==0.8.3
+networkx==2.2
+Shapely==1.6.4.post2
+psutil
+xmlschema==1.0.18
+carla
+ephem
+tabulate
+opencv-python==4.2.0.32
+numpy
+matplotlib
+six

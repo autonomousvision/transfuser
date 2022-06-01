@@ -1,0 +1,12 @@
+{
+  "available_scenarios": [
+    {
+      "Town01": [
+        {
+          "available_event_configurations": [],
+          "scenario_type": "Scenario10"
+        }
+      ]
+    }
+  ]
+}

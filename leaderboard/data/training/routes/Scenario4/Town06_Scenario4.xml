@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<routes>
+  <route id="0" town="Town06">
+    <waypoint x="616.889099" y="38.176182" z="0.0" pitch="0.0" roll="0.0" yaw="-0.027896"/>
+    <waypoint x="640.356201" y="1.446159" z="0.0" pitch="0.0" roll="0.0" yaw="224.739929"/>
+  </route>
+  <route id="1" town="Town06">
+    <waypoint x="616.895935" y="52.176182" z="0.0" pitch="0.0" roll="0.0" yaw="-0.027896"/>
+    <waypoint x="650.210693" y="-8.498170" z="0.0" pitch="0.0" roll="0.0" yaw="224.739929"/>
+  </route>
+  <route id="2" town="Town06">
+    <waypoint x="616.890808" y="41.676182" z="0.0" pitch="0.0" roll="0.0" yaw="-0.027896"/>
+    <waypoint x="642.819824" y="-1.039924" z="0.0" pitch="0.0" roll="0.0" yaw="224.739929"/>
+  </route>
+  <route id="3" town="Town06">
+    <waypoint x="616.892517" y="45.176182" z="0.0" pitch="0.0" roll="0.0" yaw="-0.027896"/>
+    <waypoint x="645.283447" y="-3.526006" z="0.0" pitch="0.0" roll="0.0" yaw="224.739929"/>
+  </route>
+  <route id="4" town="Town06">
+    <waypoint x="616.894226" y="48.676182" z="0.0" pitch="0.0" roll="0.0" yaw="-0.027896"/>
+    <waypoint x="647.747070" y="-6.012088" z="0.0" pitch="0.0" roll="0.0" yaw="224.739929"/>
+  </route>
+  <route id="5" town="Town06">
+    <waypoint x="-9.147861" y="95.436089" z="0.0" pitch="0.0" roll="0.0" yaw="89.505142"/>
+    <waypoint x="-52.159393" y="139.017502" z="0.0" pitch="0.0" roll="0.0" yaw="180.134384"/>
+  </route>
+  <route id="6" town="Town06">
+    <waypoint x="-12.647730" y="95.466316" z="0.0" pitch="0.0" roll="0.0" yaw="89.505142"/>
+    <waypoint x="-52.151184" y="135.517502" z="0.0" pitch="0.0" roll="0.0" yaw="180.134384"/>
+  </route>
+  <route id="7" town="Town06">
+    <waypoint x="-9.147861" y="95.436089" z="0.0" pitch="0.0" roll="0.0" yaw="89.505142"/>
+    <waypoint x="-52.167603" y="142.517487" z="0.0" pitch="0.0" roll="0.0" yaw="180.134384"/>
+  </route>
+  <route id="8" town="Town06">
+    <waypoint x="7.989325" y="188.383743" z="0.0" pitch="0.0" roll="0.0" yaw="-90.527451"/>
+    <waypoint x="51.726837" y="136.141373" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+  </route>
+  <route id="9" town="Town06">
+    <waypoint x="11.489177" y="188.351517" z="0.0" pitch="0.0" roll="0.0" yaw="-90.527451"/>
+    <waypoint x="51.669476" y="150.141251" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+  </route>
+  <route id="10" town="Town06">
+    <waypoint x="11.489177" y="188.351517" z="0.0" pitch="0.0" roll="0.0" yaw="-90.527451"/>
+    <waypoint x="51.683819" y="146.641281" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+  </route>
+  <route id="11" town="Town06">
+    <waypoint x="7.989325" y="188.383743" z="0.0" pitch="0.0" roll="0.0" yaw="-90.527451"/>
+    <waypoint x="51.712498" y="139.641342" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+  </route>
+  <route id="12" town="Town06">
+    <waypoint x="7.989325" y="188.383743" z="0.0" pitch="0.0" roll="0.0" yaw="-90.527451"/>
+    <waypoint x="51.698158" y="143.141312" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+  </route>
+  <route id="13" town="Town06">
+    <waypoint x="-12.100315" y="-64.975830" z="0.0" pitch="0.0" roll="0.0" yaw="90.382294"/>
+    <waypoint x="-52.799709" y="-22.744621" z="0.0" pitch="0.0" roll="0.0" yaw="179.791306"/>
+  </route>
+  <route id="14" town="Town06">
+    <waypoint x="55.079575" y="-23.137543" z="0.0" pitch="0.0" roll="0.0" yaw="179.791306"/>
+    <waypoint x="9.899195" y="-64.829041" z="0.0" pitch="0.0" roll="0.0" yaw="270.382294"/>
+  </route>
+  <route id="15" town="Town06">
+    <waypoint x="509.783081" y="91.882927" z="0.0" pitch="0.0" roll="0.0" yaw="-66.403793"/>
+    <waypoint x="579.135925" y="52.194565" z="0.0" pitch="0.0" roll="0.0" yaw="-0.027896"/>
+  </route>
+  <route id="16" town="Town06">
+    <waypoint x="450.339111" y="38.257271" z="0.0" pitch="0.0" roll="0.0" yaw="-0.027895"/>
+    <waypoint x="517.921387" y="-1.476234" z="0.0" pitch="0.0" roll="0.0" yaw="240.776825"/>
+  </route>
+  <route id="17" town="Town06">
+    <waypoint x="422.613739" y="137.660995" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+    <waypoint x="506.740417" y="99.016365" z="0.0" pitch="0.0" roll="0.0" yaw="-66.754585"/>
+  </route>
+  <route id="18" town="Town06">
+    <waypoint x="512.515564" y="26.224384" z="0.0" pitch="0.0" roll="0.0" yaw="-47.652340"/>
+    <waypoint x="461.787720" y="-10.530421" z="0.0" pitch="0.0" roll="0.0" yaw="-179.874878"/>
+  </route>
+  <route id="19" town="Town06">
+    <waypoint x="512.515564" y="26.224384" z="0.0" pitch="0.0" roll="0.0" yaw="-47.652340"/>
+    <waypoint x="461.795380" y="-14.030413" z="0.0" pitch="0.0" roll="0.0" yaw="-179.874878"/>
+  </route>
+  <route id="20" town="Town06">
+    <waypoint x="93.878098" y="38.098713" z="0.0" pitch="0.0" roll="0.0" yaw="0.341967"/>
+    <waypoint x="135.483307" y="-14.746698" z="0.0" pitch="0.0" roll="0.0" yaw="208.195465"/>
+  </route>
+  <route id="21" town="Town06">
+    <waypoint x="93.878098" y="38.098713" z="0.0" pitch="0.0" roll="0.0" yaw="0.341967"/>
+    <waypoint x="133.829636" y="-11.662005" z="0.0" pitch="0.0" roll="0.0" yaw="208.195465"/>
+  </route>
+  <route id="22" town="Town06">
+    <waypoint x="-175.883667" y="149.227325" z="0.0" pitch="0.0" roll="0.0" yaw="180.134384"/>
+    <waypoint x="-247.240570" y="183.925003" z="0.0" pitch="0.0" roll="0.0" yaw="91.281380"/>
+  </route>
+  <route id="23" town="Town06">
+    <waypoint x="42.870590" y="237.540237" z="0.0" pitch="0.0" roll="0.0" yaw="0.019546"/>
+    <waypoint x="145.957672" y="203.735046" z="0.0" pitch="0.0" roll="0.0" yaw="-48.030987"/>
+  </route>
+  <route id="24" town="Town06">
+    <waypoint x="-137.607040" y="-6.901087" z="0.0" pitch="0.0" roll="0.0" yaw="-203.529709"/>
+    <waypoint x="-99.239296" y="41.939392" z="0.0" pitch="0.0" roll="0.0" yaw="-0.023141"/>
+  </route>
+  <route id="25" town="Town06">
+    <waypoint x="-97.708420" y="-8.580958" z="0.0" pitch="0.0" roll="0.0" yaw="179.791306"/>
+    <waypoint x="-149.192200" y="30.122839" z="0.0" pitch="0.0" roll="0.0" yaw="425.871948"/>
+  </route>
+  <route id="26" town="Town06">
+    <waypoint x="-97.708420" y="-8.580958" z="0.0" pitch="0.0" roll="0.0" yaw="179.791306"/>
+    <waypoint x="-151.989548" y="31.507414" z="0.0" pitch="0.0" roll="0.0" yaw="65.833412"/>
+  </route>
+  <route id="27" town="Town06">
+    <waypoint x="-6.925866" y="197.664978" z="0.0" pitch="0.0" roll="0.0" yaw="89.472549"/>
+    <waypoint x="52.377010" y="248.043488" z="0.0" pitch="0.0" roll="0.0" yaw="0.019546"/>
+  </route>
+  <route id="28" town="Town06">
+    <waypoint x="-3.426014" y="197.632767" z="0.0" pitch="0.0" roll="0.0" yaw="89.472549"/>
+    <waypoint x="52.378204" y="244.543488" z="0.0" pitch="0.0" roll="0.0" yaw="0.019546"/>
+  </route>
+  <route id="29" town="Town06">
+    <waypoint x="9.535850" y="292.975708" z="0.0" pitch="0.0" roll="0.0" yaw="-90.898544"/>
+    <waypoint x="52.377010" y="248.043488" z="0.0" pitch="0.0" roll="0.0" yaw="0.019546"/>
+  </route>
+  <route id="30" town="Town06">
+    <waypoint x="-50.908318" y="250.166199" z="0.0" pitch="0.0" roll="0.0" yaw="-0.198922"/>
+    <waypoint x="-8.961876" y="293.265839" z="0.0" pitch="0.0" roll="0.0" yaw="89.101456"/>
+  </route>
+  <route id="31" town="Town06">
+    <waypoint x="-50.932621" y="243.166245" z="0.0" pitch="0.0" roll="0.0" yaw="-0.198922"/>
+    <waypoint x="-1.962736" y="293.156067" z="0.0" pitch="0.0" roll="0.0" yaw="89.101456"/>
+  </route>
+  <route id="32" town="Town06">
+    <waypoint x="-50.920467" y="246.666229" z="0.0" pitch="0.0" roll="0.0" yaw="-0.198922"/>
+    <waypoint x="-5.462306" y="293.210938" z="0.0" pitch="0.0" roll="0.0" yaw="89.101456"/>
+  </route>
+  <route id="33" town="Town06">
+    <waypoint x="13.035419" y="292.920837" z="0.0" pitch="0.0" roll="0.0" yaw="-90.898544"/>
+    <waypoint x="52.375816" y="251.543488" z="0.0" pitch="0.0" roll="0.0" yaw="0.019546"/>
+  </route>
+  <route id="34" town="Town06">
+    <waypoint x="-247.510895" y="198.656891" z="0.0" pitch="0.0" roll="0.0" yaw="90.142303"/>
+    <waypoint x="-177.223343" y="236.568680" z="0.0" pitch="0.0" roll="0.0" yaw="-0.103083"/>
+  </route>
+  <route id="35" town="Town06">
+    <waypoint x="-152.276321" y="236.518021" z="0.0" pitch="0.0" roll="0.0" yaw="-0.198922"/>
+    <waypoint x="-73.658104" y="200.228500" z="0.0" pitch="0.0" roll="0.0" yaw="-86.730553"/>
+  </route>
+  <route id="36" town="Town06">
+    <waypoint x="611.274780" y="152.434113" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+    <waypoint x="672.646484" y="90.429153" z="0.0" pitch="0.0" roll="0.0" yaw="270.621399"/>
+  </route>
+  <route id="37" town="Town06">
+    <waypoint x="611.332092" y="138.434235" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+    <waypoint x="658.647278" y="90.277321" z="0.0" pitch="0.0" roll="0.0" yaw="270.621399"/>
+  </route>
+  <route id="38" town="Town06">
+    <waypoint x="611.317749" y="141.934204" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+    <waypoint x="662.147095" y="90.315277" z="0.0" pitch="0.0" roll="0.0" yaw="270.621399"/>
+  </route>
+  <route id="39" town="Town06">
+    <waypoint x="611.289062" y="148.934143" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+    <waypoint x="669.146667" y="90.391197" z="0.0" pitch="0.0" roll="0.0" yaw="270.621399"/>
+  </route>
+  <route id="40" town="Town06">
+    <waypoint x="611.303406" y="145.434174" z="0.0" pitch="0.0" roll="0.0" yaw="0.234757"/>
+    <waypoint x="665.646851" y="90.353241" z="0.0" pitch="0.0" roll="0.0" yaw="270.621399"/>
+  </route>
+  <route id="41" town="Town06">
+    <waypoint x="-74.089439" y="184.722595" z="0.0" pitch="0.0" roll="0.0" yaw="262.915771"/>
+    <waypoint x="-154.883728" y="149.276581" z="0.0" pitch="0.0" roll="0.0" yaw="180.134384"/>
+  </route>
+  <route id="42" town="Town06">
+    <waypoint x="9.343582" y="94.365456" z="0.0" pitch="0.0" roll="0.0" yaw="269.505127"/>
+    <waypoint x="46.815742" y="52.354317" z="0.0" pitch="0.0" roll="0.0" yaw="-0.053956"/>
+  </route>
+  <route id="43" town="Town06">
+    <waypoint x="-54.595066" y="52.421360" z="0.0" pitch="0.0" roll="0.0" yaw="-0.023141"/>
+    <waypoint x="-12.655598" y="94.555458" z="0.0" pitch="0.0" roll="0.0" yaw="89.505142"/>
+  </route>
+  <route id="44" town="Town06">
+    <waypoint x="136.720596" y="31.324905" z="0.0" pitch="0.0" roll="0.0" yaw="-53.335621"/>
+    <waypoint x="95.227554" y="-12.783703" z="0.0" pitch="0.0" roll="0.0" yaw="179.791306"/>
+  </route>
+  <route id="45" town="Town06">
+    <waypoint x="140.769318" y="31.640158" z="0.0" pitch="0.0" roll="0.0" yaw="-57.055389"/>
+    <waypoint x="95.214806" y="-16.283680" z="0.0" pitch="0.0" roll="0.0" yaw="179.791306"/>
+  </route>
+  <route id="46" town="Town06">
+    <waypoint x="140.769318" y="31.640158" z="0.0" pitch="0.0" roll="0.0" yaw="-57.055389"/>
+    <waypoint x="95.202057" y="-19.783657" z="0.0" pitch="0.0" roll="0.0" yaw="179.791306"/>
+  </route>
+  <route id="47" town="Town06">
+    <waypoint x="140.769318" y="31.640158" z="0.0" pitch="0.0" roll="0.0" yaw="-57.055389"/>
+    <waypoint x="95.189308" y="-23.283634" z="0.0" pitch="0.0" roll="0.0" yaw="179.791306"/>
+  </route>
+</routes>
