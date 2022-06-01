@@ -2,7 +2,7 @@
 
 ## [Paper](https://arxiv.org/abs/2205.15997) | [Supplementary]() 
 
-<img src="figures/teaser.svg" height="192" hspace=30> <img src="figures/arch.svg" height="192">
+<img src="figures/demo.gif">
 
 This repository contains the code for the paper [TransFuser: Imitation with Transformer-Based Sensor Fusion for Autonomous Driving](https://arxiv.org/abs/2205.15997). This work is a journal extension of the CVPR 2021 paper [Multi-Modal Fusion Transformer for End-to-End Autonomous Driving](https://arxiv.org/abs/2104.09224). If you find our code or papers useful, please cite:
 
