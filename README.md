@@ -77,7 +77,7 @@ By editing the arguments in `local_evaluation.sh`, the autopilot can be used in 
 
 Once the CARLA server is running, run the autopilot with the script
 ```Shell
-./leaderboard/scripts/local_evaluation.sh
+./leaderboard/scripts/local_evaluation.sh <carla root> <working directory of this repo (*/transfuser/)>
 ```
 
 ### Training scenarios and routes
