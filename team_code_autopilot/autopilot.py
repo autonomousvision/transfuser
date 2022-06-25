@@ -39,6 +39,7 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
         # Dynamics models
         self.frame_rate = 20 # Brame rate used by kinematic bicycle model for forecasting
         self.ego_model     = EgoModel(dt=(1.0 / self.frame_rate))
+        self.ego_model_gps = EgoModel(dt=(1.0 / self.frame_rate_sim))
         self.vehicle_model = EgoModel(dt=(1.0 / self.frame_rate))
 
         # Configuration
@@ -220,7 +221,7 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
         for i in range(len(self.gps_buffer)):
             loc =self.gps_buffer[i]
             loc_temp = np.array([loc[1], -loc[0]]) #Bicycle model uses a different coordinate system
-            next_loc_tmp, _, _ = self.ego_model.forward(loc_temp, yaw, speed, action)
+            next_loc_tmp, _, _ = self.ego_model_gps.forward(loc_temp, yaw, speed, action)
             next_loc = np.array([-next_loc_tmp[1], next_loc_tmp[0]])
             self.gps_buffer[i] = next_loc
 
@@ -498,8 +499,6 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
                                                     yaw   = light.trigger_volume.rotation.yaw   + gloabl_rot.yaw,
                                                     roll  = light.trigger_volume.rotation.roll  + gloabl_rot.roll)
                 if (self.visualize == 1):
-                    self._world.debug.draw_point(vehicle_location + carla.Location(z=2.0), size=size, color=color, life_time=(1.0/self.frame_rate_sim))
-                    self._world.debug.draw_point(center_bounding_box + carla.Location(z=2.0), size=size, color=color, life_time=(1.0/self.frame_rate_sim))
                     self._world.debug.draw_box(box=bounding_box, rotation= bounding_box.rotation, thickness=0.1, color=color, life_time=(1.0/self.frame_rate_sim))
 
                 if(self.check_obb_intersection(light_detector_bb, bounding_box) == True):
@@ -544,7 +543,6 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
                             else:
                                 self.cleared_stop_signs.append(stop_sign.id)
                     if (self.visualize == 1):
-                        self._world.debug.draw_point(center_bb_stop_sign + carla.Location(z=2.0), size=0.1, color=color, life_time=(1.0 / self.frame_rate_sim))
                         self._world.debug.draw_box(box=bounding_box_stop_sign, rotation=bounding_box_stop_sign.rotation, thickness=0.1, color=color, life_time=(1.0 / self.frame_rate_sim))
                 
                 # reset past cleared stop signs
@@ -593,8 +591,6 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
                         new_y = walker_location.y + walker_direction.y * walker_speed * (1.0 / self.frame_rate)
                         new_z = walker_location.z + walker_direction.z * walker_speed * (1.0 / self.frame_rate)
                         walker_location = carla.Location(new_x, new_y, new_z)
-                        if (self.visualize == 1):
-                            self._world.debug.draw_point(walker_location, size=0.1, color=color, life_time=(1.0 / self.frame_rate_sim))
 
                         transform = carla.Transform(walker_location)
                         bounding_box = carla.BoundingBox(transform.location, walker.bounding_box.extent)
@@ -644,9 +640,6 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
                             break
 
                         next_loc, next_yaw, next_speed = self.vehicle_model.forward(next_loc, next_yaw, next_speed, action)
-                        if (self.visualize == 1):
-                            self._world.debug.draw_point(carla.Location(x=next_loc[0].item(), y=next_loc[1].item(), z=traffic_transform.location.z) + carla.Location(z=3.0), size=0.1, 
-                                                        color=color, life_time=(1.0 / self.frame_rate_sim))
 
                         delta_yaws = next_yaw.item() * 180.0 / np.pi
 
@@ -672,9 +665,6 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
             to_delete = set(self.vehicle_speed_buffer.keys()).difference(tmp_near_vehicle_id)
             for d in to_delete:
                 del self.vehicle_speed_buffer[d]
-            if (self.visualize == 1):
-                self._world.debug.draw_point(vehicle_location + carla.Location(z=3.0), size=0.1, color=color, life_time=(1.0 / self.frame_rate_sim))
-
             # -----------------------------------------------------------
             # Intersection checks with ego vehicle
             # -----------------------------------------------------------
@@ -709,10 +699,6 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
                 throttle_extrapolation_temp = self._get_throttle_extrapolation(self.target_speed, next_speed_no_brake, restore=False)
                 brake_extrapolation_temp = 1.0 if self._waypoint_planner_extrapolation.is_last else 0.0
                 action_no_brake = np.array(np.stack([steer_extrapolation_temp, float(throttle_extrapolation_temp), brake_extrapolation_temp], axis=-1))
-
-                if (self.visualize == 1):
-                    if self.junction or i <= number_of_future_frames_no_junction:
-                        self._world.debug.draw_point(carla.Location(x=next_loc_no_brake[0].item(), y=next_loc_no_brake[1].item(), z=vehicle_transform.location.z) + carla.Location(z=3.0),size=0.1, color=color, life_time=(1.0 / self.frame_rate))
 
                 delta_yaws_no_brake = next_yaw_no_brake.item() * 180.0 / np.pi
                 cosine = np.cos(next_yaw_no_brake.item())
@@ -851,9 +837,6 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
                     new_y = walker_location.y + walker_direction.y * walker_speed * (1.0 / self.frame_rate)
                     new_z = walker_location.z + walker_direction.z * walker_speed * (1.0 / self.frame_rate)
                     walker_location = carla.Location(new_x, new_y, new_z)
-                    if (self.visualize == 1):
-                        self._world.debug.draw_point(walker_location, size=0.1, color=color, life_time=(1.0 / self.frame_rate_sim))
-
                     transform = carla.Transform(walker_location)
                     bounding_box = carla.BoundingBox(transform.location, walker.bounding_box.extent)
                     bounding_box.rotation = carla.Rotation(pitch = walker.bounding_box.rotation.pitch + walker_transform.rotation.pitch,
@@ -902,10 +885,6 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
                         break
 
                     next_loc, next_yaw, next_speed = self.vehicle_model.forward(next_loc, next_yaw, next_speed, action)
-                    if (self.visualize == 1):
-                        self._world.debug.draw_point(carla.Location(x=next_loc[0].item(), y=next_loc[1].item(), z=traffic_transform.location.z) + carla.Location(z=3.0), size=0.1, 
-                                                    color=color, life_time=(1.0 / self.frame_rate_sim))
-
                     delta_yaws = next_yaw.item() * 180.0 / np.pi
 
                     transform             = carla.Transform(carla.Location(x=next_loc[0].item(), y=next_loc[1].item(), z=traffic_transform.location.z))
@@ -930,9 +909,6 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
         to_delete = set(self.vehicle_speed_buffer.keys()).difference(tmp_near_vehicle_id)
         for d in to_delete:
             del self.vehicle_speed_buffer[d]
-        if (self.visualize == 1):
-            self._world.debug.draw_point(vehicle_location + carla.Location(z=3.0), size=0.1, color=color, life_time=(1.0 / self.frame_rate_sim))
-
         # -----------------------------------------------------------
         # Intersection checks with ego vehicle
         # -----------------------------------------------------------
@@ -979,10 +955,6 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
                 tmp_yaw = prev_yaw + (next_yaw-prev_yaw)/number_of_interpolation_frames * k
                 # cur_yaw = next_yaw # + delta_yaw
                 # next_yaw = np.array([delta_yaw]) #+ delta_yaw
-
-                if (self.visualize == 1):
-                    if self.junction or i <= number_of_future_frames_no_junction:
-                        self._world.debug.draw_point(carla.Location(x=tmp_loc[0].item(), y=tmp_loc[1].item(), z=vehicle_transform.location.z) + carla.Location(z=3.0),size=0.1, color=color, life_time=(1.0 / self.frame_rate))
 
                 next_yaw_deg = tmp_yaw.item() * 180.0 / np.pi
                 cosine = np.cos(tmp_yaw.item())
@@ -1041,6 +1013,7 @@ class AutoPilot(autonomous_agent.AutonomousAgent):
                     self._world.debug.draw_box(box=bounding_box_back, rotation=bounding_box.rotation, thickness=0.1, color=color2, life_time=(1.0 / self.frame_rate_sim))
 
                 prev_yaw = next_yaw
+
 
         if (self.visualize == 1):
             self._world.debug.draw_box(box=bounding_box, rotation=bounding_box.rotation, thickness=0.1, color=color, life_time=(1.0 / self.frame_rate_sim))
