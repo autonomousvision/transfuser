@@ -38,6 +38,7 @@ This repository contains the code for the paper [TransFuser: Imitation with Tran
 - [x] Autopilot
 - [x] Training scenarios and routes
 - [x] Longest6 benchmark
+- [x] Inference code
 - [ ] Data generation
 - [ ] TransFuser and Latent TransFuser agents
 - [ ] Leaderboard submission
@@ -135,3 +136,12 @@ alpha login
 alpha benchmark:submit --split <2/3> <docker_image>
 ```
 Use ```split 2``` for MAP track and ```split 3``` for SENSORS track. -->
+
+### Parsing longest6 results
+To compute additional statistics from the results of evaluation runs we provide a parser script [tools/result_parser.py](./tools/result_parser.py).
+
+```Shell
+${WORK_DIR}/tools/result_parser.py --xml ${WORK_DIR}/leaderboard/data/longest6/longest6.xml --results /path/to/folder/with/json_results/ --save_dir /path/to/output --town_maps ${WORK_DIR}/leaderboard/data/town_maps_xodr
+```
+It will generate a results.csv file containing the average results of the run as well as additional statistics.
+It also generates town maps and marks the places where infractions occurred.
