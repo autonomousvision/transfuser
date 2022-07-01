@@ -41,9 +41,9 @@ This repository contains the code for the paper [TransFuser: Imitation with Tran
 - [x] Inference code
 - [ ] Data generation
 - [ ] TransFuser and Latent TransFuser agents
-- [ ] Leaderboard submission
+- [x] Leaderboard submission
 - [ ] Dataset upload
-- [ ] Training script
+- [x] Training script
 - [ ] Additional tools
 
 
@@ -65,6 +65,8 @@ chmod +x setup_carla.sh
 ./setup_carla.sh
 conda env create -f environment.yml
 conda activate tfuse
+pip install torch-scatter -f https://data.pyg.org/whl/torch-1.11.0+cu102.html
+pip install mmcv-full==1.5.3 -f https://download.openmmlab.com/mmcv/dist/cu102/torch1.11.0/index.html
 ```
 
 ## Run the autopilot
