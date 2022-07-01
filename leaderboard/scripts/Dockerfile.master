@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu16.04
 
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
@@ -67,6 +67,7 @@ COPY .tmp/leaderboard ${LEADERBOARD_ROOT}
 COPY .tmp/team_code ${TEAM_CODE_ROOT}
 
 RUN mkdir -p /workspace/results
+RUN ls /workspace/leaderboard/scripts/
 RUN chmod +x /workspace/leaderboard/scripts/run_evaluation.sh
 
 
@@ -81,6 +82,11 @@ ENV PYTHONPATH "/workspace":${PYTHONPATH}
 RUN apt-get update && apt-get install -y --no-install-recommends libgtk2.0-dev
 
 RUN pip install -r /workspace/team_code/requirements.txt
+
+RUN pip install torch-scatter -f https://data.pyg.org/whl/torch-1.11.0+cu102.html
+RUN pip install mmcv-full==1.5.3 -f https://download.openmmlab.com/mmcv/dist/cu102/torch1.11.0/index.html
+RUN pip install mmsegmentation==0.25.0
+RUN pip install mmdet==2.25.0
 
 ENV TEAM_AGENT ${TEAM_CODE_ROOT}/submission_agent.py
 ENV TEAM_CONFIG ${TEAM_CODE_ROOT}/model_ckpt/transfuser
