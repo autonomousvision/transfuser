@@ -40,7 +40,7 @@ This repository contains the code for the paper [TransFuser: Imitation with Tran
 - [x] Longest6 benchmark
 - [x] Inference code
 - [ ] Data generation
-- [ ] TransFuser and Latent TransFuser agents
+- [x] Pretrained agents
 - [x] Leaderboard submission
 - [ ] Dataset upload
 - [x] Training script
@@ -86,9 +86,14 @@ Once the CARLA server is running, run the autopilot with the script
 ### Training scenarios and routes
 See the [tools/dataset](./tools/dataset) folder for detailed documentation regarding the training routes and scenarios. We will soon release instructions on how to generate the dataset, as well as upload the dataset used in our paper. 
 
+
 ### Longest6 benchmark
 We make some minor modifications to the CARLA leaderboard code for the Longest6 benchmark, which are documented [here](./leaderboard). See the [leaderboard/data/longest6](./leaderboard/data/longest6/) folder for a description of Longest6 and how to evaluate on it.
 
+### Pretrained agents
+Pre-trained agent files for all 4 methods can be downloaded from [AWS](https://s3.eu-central-1.amazonaws.com/avg-projects/transfuser/models_2022.zip).
+To evaluate the models use [submission_agent.py](./team_code_latest/submission_agent.py) as the agent file and point to the folder you downloaded the model weights into for the agent-config.
+The code will automatically be configured to use the correct method based on the args.txt file in the model folder.
 
 <!-- ### Building docker image
 
