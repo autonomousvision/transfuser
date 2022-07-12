@@ -39,18 +39,19 @@ This repository contains the code for the paper [TransFuser: Imitation with Tran
 - [x] Training scenarios and routes
 - [x] Longest6 benchmark
 - [x] Inference code
-- [ ] Data generation
+- [x] Data generation
 - [x] Pretrained agents
-- [x] Leaderboard submission
-- [ ] Dataset upload
 - [x] Training script
+- [ ] Dataset upload
+- [ ] Leaderboard submission instructions
 - [ ] Additional tools
 
 
 ## Contents
 
 1. [Setup](#setup)
-2. [Autopilot](#run-the-autopilot)
+2. [Training](#training)
+2. [Evaluation](#evaluation)
 
 
 ## Setup
@@ -69,31 +70,67 @@ pip install torch-scatter -f https://data.pyg.org/whl/torch-1.11.0+cu102.html
 pip install mmcv-full==1.5.3 -f https://download.openmmlab.com/mmcv/dist/cu102/torch1.11.0/index.html
 ```
 
-## Run the autopilot
-We have currently provided a skeleton script for evaluation or data generation via a privileged agent which we call the autopilot (`/team_code_autopilot/autopilot.py`). To run the autopilot, the first step is to launch a CARLA server:
+## Training
+
+### Training scenarios and routes
+See the [tools/dataset](./tools/dataset) folder for detailed documentation regarding the training routes and scenarios. We will soon upload the dataset used in our paper, which is generated from all the routes in [this folder.](../../leaderboard/data/training/)
+
+### Data generation
+We have provided a script for data generation via a privileged agent which we call the autopilot (`/team_code_autopilot/autopilot.py`). To generate data, the first step is to launch a CARLA server:
 
 ```Shell
 ./CarlaUE4.sh --world-port=2000 -opengl
 ```
 
-By editing the arguments in `local_evaluation.sh`, the autopilot can be used in two ways: for generating training data using the training routes and scenarios, or for benchmarking its performance on the Longest6 routes.
-
-Once the CARLA server is running, run the autopilot with the script
+Once the CARLA server is running, use the script below for generating training data:
 ```Shell
-./leaderboard/scripts/local_evaluation.sh <carla root> <working directory of this repo (*/transfuser/)>
+./leaderboard/scripts/datagen.sh <carla root> <working directory of this repo (*/transfuser/)>
 ```
 
-### Training scenarios and routes
-See the [tools/dataset](./tools/dataset) folder for detailed documentation regarding the training routes and scenarios. We will soon release instructions on how to generate the dataset, as well as upload the dataset used in our paper. 
+The main variables to set are `SCENARIOS` and `ROUTES`. 
 
+### Training script
+
+The code for training via imitation learning is provided in [train.py.](./team_code_latest/train.py)
+
+
+## Evaluation
 
 ### Longest6 benchmark
 We make some minor modifications to the CARLA leaderboard code for the Longest6 benchmark, which are documented [here](./leaderboard). See the [leaderboard/data/longest6](./leaderboard/data/longest6/) folder for a description of Longest6 and how to evaluate on it.
 
 ### Pretrained agents
-Pre-trained agent files for all 4 methods can be downloaded from [AWS](https://s3.eu-central-1.amazonaws.com/avg-projects/transfuser/models_2022.zip).
-To evaluate the models use [submission_agent.py](./team_code_latest/submission_agent.py) as the agent file and point to the folder you downloaded the model weights into for the agent-config.
-The code will automatically be configured to use the correct method based on the args.txt file in the model folder.
+Pre-trained agent files for all 4 methods can be downloaded from [AWS](https://s3.eu-central-1.amazonaws.com/avg-projects/transfuser/models_2022.zip):
+
+```Shell
+mkdir model_ckpt
+wget https://s3.eu-central-1.amazonaws.com/avg-projects/transfuser/models_2022.zip -P model_ckpt
+unzip model_ckpt/models_2022.zip -d model_ckpt/
+rm model_ckpt/models_2022.zip
+```
+
+### Running an agent
+To evaluate a model, we first launch a CARLA server:
+
+```Shell
+./CarlaUE4.sh --world-port=2000 -opengl
+```
+
+Once the CARLA server is running, evaluate an agent with the script:
+```Shell
+./leaderboard/scripts/local_evaluation.sh <carla root> <working directory of this repo (*/transfuser/)>
+```
+
+By editing the arguments in `local_evaluation.sh`, we can benchmark performance on the Longest6 routes. You can evaluate both privileged agents (such as [autopilot.py]) and sensor-based models. To evaluate the sensor-based models use [submission_agent.py](./team_code_latest/submission_agent.py) as the `TEAM_AGENT` and point to the folder you downloaded the model weights into for the `TEAM_CONFIG`. The code is automatically configured to use the correct method based on the args.txt file in the model folder.
+
+### Parsing longest6 results
+To compute additional statistics from the results of evaluation runs we provide a parser script [tools/result_parser.py](./tools/result_parser.py).
+
+```Shell
+${WORK_DIR}/tools/result_parser.py --xml ${WORK_DIR}/leaderboard/data/longest6/longest6.xml --results /path/to/folder/with/json_results/ --save_dir /path/to/output --town_maps ${WORK_DIR}/leaderboard/data/town_maps_xodr
+```
+
+It will generate a results.csv file containing the average results of the run as well as additional statistics. It also generates town maps and marks the locations where infractions occurred.
 
 <!-- ### Building docker image
 
@@ -143,12 +180,3 @@ alpha login
 alpha benchmark:submit --split <2/3> <docker_image>
 ```
 Use ```split 2``` for MAP track and ```split 3``` for SENSORS track. -->
-
-### Parsing longest6 results
-To compute additional statistics from the results of evaluation runs we provide a parser script [tools/result_parser.py](./tools/result_parser.py).
-
-```Shell
-${WORK_DIR}/tools/result_parser.py --xml ${WORK_DIR}/leaderboard/data/longest6/longest6.xml --results /path/to/folder/with/json_results/ --save_dir /path/to/output --town_maps ${WORK_DIR}/leaderboard/data/town_maps_xodr
-```
-It will generate a results.csv file containing the average results of the run as well as additional statistics.
-It also generates town maps and marks the places where infractions occurred.

@@ -39,12 +39,14 @@ from leaderboard.utils.route_indexer import RouteIndexer
 sensors_to_icons = {
     'sensor.camera.rgb':        'carla_camera',
     'sensor.lidar.ray_cast':    'carla_lidar',
-    'sensor.stitch_camera.rgb': 'carla_camera',  # For local World on Rails evaluation, don't push
     'sensor.other.radar':       'carla_radar',
     'sensor.other.gnss':        'carla_gnss',
     'sensor.other.imu':         'carla_imu',
     'sensor.opendrive_map':     'carla_opendrive_map',
-    'sensor.speedometer':       'carla_speedometer'
+    'sensor.speedometer':       'carla_speedometer',
+    'sensor.stitch_camera.rgb': 'carla_camera',  # for local World on Rails evaluation
+    'sensor.camera.semantic_segmentation': 'carla_camera', # for datagen
+    'sensor.camera.depth':      'carla_camera', # for datagen
 }
 
 
@@ -256,12 +258,17 @@ class LeaderboardEvaluator(object):
 
         # Prepare the statistics of the route
         self.statistics_manager.set_route(config.name, config.index)
+        if int(os.environ['DATAGEN'])==1:
+            CarlaDataProvider._rng = random.RandomState(config.index)
 
         # Set up the user's agent, and the timer to avoid freezing the simulation
         try:
             self._agent_watchdog.start()
             agent_class_name = getattr(self.module_agent, 'get_entry_point')()
-            self.agent_instance = getattr(self.module_agent, agent_class_name)(args.agent_config)
+            if int(os.environ['DATAGEN'])==1:
+                self.agent_instance = getattr(self.module_agent, agent_class_name)(args.agent_config, config.index)
+            else:
+                self.agent_instance = getattr(self.module_agent, agent_class_name)(args.agent_config)
             config.agent = self.agent_instance
 
             # Check and store the sensors

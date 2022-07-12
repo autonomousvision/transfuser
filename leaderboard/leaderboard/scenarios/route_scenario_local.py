@@ -11,6 +11,7 @@ This module provides Challenge routes as standalone scenarios
 
 from __future__ import print_function
 
+import os
 import math
 import xml.etree.ElementTree as ET
 import numpy.random as random
@@ -35,7 +36,7 @@ from srunner.scenarios.other_leading_vehicle import OtherLeadingVehicle
 from srunner.scenarios.maneuver_opposite_direction import ManeuverOppositeDirection
 from srunner.scenarios.junction_crossing_route import SignalJunctionCrossingRoute, NoSignalJunctionCrossingRoute
 
-from srunner.scenariomanager.scenarioatomics.atomic_criteria import (CollisionTest,
+from srunner.scenariomanager.scenarioatomics.atomic_criteria_local import (CollisionTest,
                                                                      InRouteTest,
                                                                      RouteCompletionTest,
                                                                      OutsideRouteLanesTest,
@@ -446,7 +447,24 @@ class RouteScenario(BasicScenario):
         Set other_actors to the superset of all scenario actors
         """
         # Create the background activity of the route
-        amount = 500 # use all spawn points
+        if int(os.environ.get('DATAGEN'))==1:
+            town_amount = {
+                'Town01': 130,
+                'Town02': 60,
+                'Town03': 135,
+                'Town04': 190,
+                'Town05': 120,
+                'Town06': 155,
+                'Town07': 60,
+                'Town08': 180,
+                'Town09': 300,
+                'Town10HD': 80,
+            }
+
+            amount = town_amount[config.town] if config.town in town_amount else 0
+            amount = random.randint(amount, 2*amount)
+        else:
+            amount = 500 # use all spawn points
 
         new_actors = CarlaDataProvider.request_new_batch_actors('vehicle.*',
                                                                 amount,

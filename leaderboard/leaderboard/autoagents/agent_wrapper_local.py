@@ -12,7 +12,6 @@ Wrapper for autonomous agents required for tracking and checking of used sensors
 from __future__ import print_function
 import math
 import os
-import time
 
 import carla
 from srunner.scenariomanager.carla_data_provider import CarlaDataProvider
@@ -23,6 +22,7 @@ from leaderboard.envs.sensor_interface import CallBack, OpenDriveMapReader, Spee
 # Use this line instead to run WOR
 #from leaderboard1.leaderboard.envs.sensor_interface import (CallBack, StitchCameraReader, OpenDriveMapReader, SpeedometerReader, SensorConfigurationInvalid)
 
+DATAGEN = int(os.environ.get('DATAGEN'))
 MAX_ALLOWED_RADIUS_SENSOR = 10.0
 
 SENSORS_LIMITS = {
@@ -33,7 +33,9 @@ SENSORS_LIMITS = {
     'sensor.other.imu': 1,
     'sensor.opendrive_map': 1,
     'sensor.speedometer': 1,
-    'sensor.stitch_camera.rgb': 1
+    'sensor.stitch_camera.rgb': 1,
+    'sensor.camera.depth': 4, # for data generation
+    'sensor.camera.semantic_segmentation': 4 # for data generation
 }
 
 
@@ -61,7 +63,9 @@ class AgentWrapper(object):
         'sensor.other.radar',
         'sensor.other.gnss',
         'sensor.other.imu',
-        'sensor.stitch_camera.rgb' # For World on Rails eval, don't push
+        'sensor.stitch_camera.rgb', # for World on Rails eval
+        'sensor.camera.depth', # for data generation
+        'sensor.camera.semantic_segmentation', # for data generation
     ]
 
     _agent = None
@@ -106,10 +110,12 @@ class AgentWrapper(object):
                     bp.set_attribute('image_size_x', str(sensor_spec['width']))
                     bp.set_attribute('image_size_y', str(sensor_spec['height']))
                     bp.set_attribute('fov', str(sensor_spec['fov']))
-                    bp.set_attribute('lens_circle_multiplier', str(3.0))
-                    bp.set_attribute('lens_circle_falloff', str(3.0))
-                    bp.set_attribute('chromatic_aberration_intensity', str(0.5))
-                    bp.set_attribute('chromatic_aberration_offset', str(0))
+                    if DATAGEN==0:
+                        bp.set_attribute('lens_circle_multiplier', str(3.0))
+                        bp.set_attribute('lens_circle_falloff', str(3.0))
+                    if sensor_spec['type'].startswith('sensor.camera.rgb'):
+                        bp.set_attribute('chromatic_aberration_intensity', str(0.5))
+                        bp.set_attribute('chromatic_aberration_offset', str(0))
 
                     sensor_location = carla.Location(x=sensor_spec['x'], y=sensor_spec['y'],
                                                      z=sensor_spec['z'])
@@ -118,11 +124,14 @@ class AgentWrapper(object):
                                                      yaw=sensor_spec['yaw'])
                 elif sensor_spec['type'].startswith('sensor.lidar'):
                     bp.set_attribute('range', str(85))
-                    bp.set_attribute('rotation_frequency', str(10))
+                    if DATAGEN==1:
+                        bp.set_attribute('rotation_frequency', str(sensor_spec['rotation_frequency']))
+                        bp.set_attribute('points_per_second', str(sensor_spec['points_per_second']))
+                    else:
+                        bp.set_attribute('rotation_frequency', str(10))
+                        bp.set_attribute('points_per_second', str(600000))
                     bp.set_attribute('channels', str(64))
                     bp.set_attribute('upper_fov', str(10))
-                    bp.set_attribute('lower_fov', str(-30))
-                    bp.set_attribute('points_per_second', str(600000))
                     bp.set_attribute('atmosphere_attenuation_rate', str(0.004))
                     bp.set_attribute('dropoff_general_rate', str(0.45))
                     bp.set_attribute('dropoff_intensity_limit', str(0.8))
@@ -146,9 +155,10 @@ class AgentWrapper(object):
                                                      yaw=sensor_spec['yaw'])
 
                 elif sensor_spec['type'].startswith('sensor.other.gnss'):
-                    bp.set_attribute('noise_alt_stddev', str(0.000005))
-                    bp.set_attribute('noise_lat_stddev', str(0.000005))
-                    bp.set_attribute('noise_lon_stddev', str(0.000005))
+                    if DATAGEN==0:
+                        bp.set_attribute('noise_alt_stddev', str(0.000005))
+                        bp.set_attribute('noise_lat_stddev', str(0.000005))
+                        bp.set_attribute('noise_lon_stddev', str(0.000005))
                     bp.set_attribute('noise_alt_bias', str(0.0))
                     bp.set_attribute('noise_lat_bias', str(0.0))
                     bp.set_attribute('noise_lon_bias', str(0.0))

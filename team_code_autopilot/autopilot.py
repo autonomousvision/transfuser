@@ -11,8 +11,8 @@ import numpy as np
 import carla
 
 from srunner.scenariomanager.carla_data_provider import CarlaDataProvider
-from leaderboard.autoagents import autonomous_agent
-from new_sensors.nav_planner import PIDController, RoutePlanner, interpolate_trajectory
+from leaderboard.autoagents import autonomous_agent, autonomous_agent_local
+from nav_planner import PIDController, RoutePlanner, interpolate_trajectory
 
 SAVE_PATH = os.environ.get('SAVE_PATH', None)
 
@@ -21,7 +21,7 @@ def get_entry_point():
     return 'AutoPilot'
 
 
-class AutoPilot(autonomous_agent.AutonomousAgent):
+class AutoPilot(autonomous_agent_local.AutonomousAgent):
     def setup(self, path_to_conf_file, route_index=None):
         
         self.track = autonomous_agent.Track.MAP
