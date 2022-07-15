@@ -161,3 +161,4 @@ cython_debug/
 
 results/
 model_ckpt/
+data/

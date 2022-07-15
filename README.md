@@ -1,6 +1,6 @@
 # TransFuser: Imitation with Transformer-Based Sensor Fusion for Autonomous Driving
 
-## [Paper](https://arxiv.org/abs/2205.15997) | [Supplementary]() 
+## [Paper](https://arxiv.org/abs/2205.15997) 
 
 <img src="figures/demo.gif">
 
@@ -42,7 +42,7 @@ This repository contains the code for the paper [TransFuser: Imitation with Tran
 - [x] Data generation
 - [x] Pretrained agents
 - [x] Training script
-- [ ] Dataset upload
+- [x] Dataset upload
 - [ ] Leaderboard submission instructions
 - [ ] Additional tools
 
@@ -50,8 +50,8 @@ This repository contains the code for the paper [TransFuser: Imitation with Tran
 ## Contents
 
 1. [Setup](#setup)
-2. [Training](#training)
-2. [Evaluation](#evaluation)
+2. [Dataset and Training](#dataset-and-training)
+3. [Evaluation](#evaluation)
 
 
 ## Setup
@@ -70,24 +70,41 @@ pip install torch-scatter -f https://data.pyg.org/whl/torch-1.11.0+cu102.html
 pip install mmcv-full==1.5.3 -f https://download.openmmlab.com/mmcv/dist/cu102/torch1.11.0/index.html
 ```
 
-## Training
+## Dataset and Training
+Our dataset is generated via a privileged agent which we call the autopilot (`/team_code_autopilot/autopilot.py`) in 8 CARLA towns using the routes and scenario files provided in [this folder](../../leaderboard/data/training/). See the [tools/dataset](./tools/dataset) folder for detailed documentation regarding the training routes and scenarios. You can download the dataset (210GB) by running:
 
-### Training scenarios and routes
-See the [tools/dataset](./tools/dataset) folder for detailed documentation regarding the training routes and scenarios. We will soon upload the dataset used in our paper, which is generated from all the routes in [this folder.](../../leaderboard/data/training/)
+```Shell
+chmod +x download_data.sh
+./download_data.sh
+```
+
+The dataset is structured as follows:
+```
+- Scenario
+    - Town
+        - Route
+            - rgb: camera images
+            - depth: corresponding depth images
+            - semantics: corresponding segmentation images
+            - lidar: 3d point cloud in .npy format
+            - topdown: topdown segmentation maps
+            - label_raw: 3d bounding boxes for vehicles
+            - measurements: contains ego-agent's position, velocity and other metadata
+```
 
 ### Data generation
-We have provided a script for data generation via a privileged agent which we call the autopilot (`/team_code_autopilot/autopilot.py`). To generate data, the first step is to launch a CARLA server:
+In addition to the dataset itself, we have provided the scripts for data generation with our autopilot agent. To generate data, the first step is to launch a CARLA server:
 
 ```Shell
 ./CarlaUE4.sh --world-port=2000 -opengl
 ```
 
-Once the CARLA server is running, use the script below for generating training data:
+For more information on running CARLA servers (e.g. on a machine without a display), see the [official documentation.](https://carla.readthedocs.io/en/stable/carla_headless/) Once the server is running, use the script below for generating training data:
 ```Shell
 ./leaderboard/scripts/datagen.sh <carla root> <working directory of this repo (*/transfuser/)>
 ```
 
-The main variables to set are `SCENARIOS` and `ROUTES`. 
+The main variables to set for this script are `SCENARIOS` and `ROUTES`. 
 
 ### Training script
 
