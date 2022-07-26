@@ -172,7 +172,7 @@ It will generate a results.csv file containing the average results of the run as
 ### Submitting to the CARLA leaderboard
 To submit to the CARLA leaderboard you need docker installed on your system.
 Edit the paths at the start of [make_docker.sh](./leaderboard/scripts/make_docker.sh).
-Create the folder *team_code_transfuser/model_ckpt/transfuser*
+Create the folder *team_code_transfuser/model_ckpt/transfuser*.
 Copy the *model.pth* files and *args.txt* that you want to evaluate to *team_code_transfuser/model_ckpt/transfuser*.
 If you want to evaluate an ensemble simply copy multiple .pth files into the folder, the code will load all of them and ensemble the predictions.
 
