@@ -75,7 +75,7 @@ pip install mmcv-full==1.5.3 -f https://download.openmmlab.com/mmcv/dist/cu102/t
 ```
 
 ## Dataset and Training
-Our dataset is generated via a privileged agent which we call the autopilot (`/team_code_autopilot/autopilot.py`) in 8 CARLA towns using the routes and scenario files provided in [this folder](../../leaderboard/data/training/). See the [tools/dataset](./tools/dataset) folder for detailed documentation regarding the training routes and scenarios. You can download the dataset (210GB) by running:
+Our dataset is generated via a privileged agent which we call the autopilot (`/team_code_autopilot/autopilot.py`) in 8 CARLA towns using the routes and scenario files provided in [this folder](./leaderboard/data/training/). See the [tools/dataset](./tools/dataset) folder for detailed documentation regarding the training routes and scenarios. You can download the dataset (210GB) by running:
 
 ```Shell
 chmod +x download_data.sh
@@ -112,7 +112,23 @@ The main variables to set for this script are `SCENARIOS` and `ROUTES`.
 
 ### Training script
 
-The code for training via imitation learning is provided in [train.py.](./team_code_latest/train.py)
+The code for training via imitation learning is provided in [train.py.](./team_code_transfuser/train.py) \
+A minimal example of running the training script on a single machine:
+```Shell
+cd team_code_transfuser
+python train.py --batch_size 10 --logdir /path/to/logdir --root_dir /path/to/dataset_root/ --parallel_training 0
+```
+The training script has many more useful features documented at the start of the main function. 
+One of them is parallel training. 
+The script has to be started differently when training on a multi-gpu node:
+```Shell
+cd team_code_transfuser
+CUDA_VISIBLE_DEVICES=0,1 OMP_NUM_THREADS=16 OPENBLAS_NUM_THREADS=1 torchrun --nnodes=1 --nproc_per_node=2 --max_restarts=0 --rdzv_id=1234576890 --rdzv_backend=c10d train.py --logdir /path/to/logdir --root_dir /path/to/dataset_root/ --parallel_training 1
+```
+Enumerate the GPUs you want to train on with CUDA_VISIBLE_DEVICES.
+Set the variable OMP_NUM_THREADS to the number of cpus available on your system.
+Set OPENBLAS_NUM_THREADS=1 if you want to avoid threads spawning other threads.
+Set --nproc_per_node to the number of available GPUs on your node.
 
 
 ## Evaluation
@@ -142,7 +158,7 @@ Once the CARLA server is running, evaluate an agent with the script:
 ./leaderboard/scripts/local_evaluation.sh <carla root> <working directory of this repo (*/transfuser/)>
 ```
 
-By editing the arguments in `local_evaluation.sh`, we can benchmark performance on the Longest6 routes. You can evaluate both privileged agents (such as [autopilot.py]) and sensor-based models. To evaluate the sensor-based models use [submission_agent.py](./team_code_latest/submission_agent.py) as the `TEAM_AGENT` and point to the folder you downloaded the model weights into for the `TEAM_CONFIG`. The code is automatically configured to use the correct method based on the args.txt file in the model folder.
+By editing the arguments in `local_evaluation.sh`, we can benchmark performance on the Longest6 routes. You can evaluate both privileged agents (such as [autopilot.py]) and sensor-based models. To evaluate the sensor-based models use [submission_agent.py](./team_code_transfuser/submission_agent.py) as the `TEAM_AGENT` and point to the folder you downloaded the model weights into for the `TEAM_CONFIG`. The code is automatically configured to use the correct method based on the args.txt file in the model folder.
 
 ### Parsing longest6 results
 To compute additional statistics from the results of evaluation runs we provide a parser script [tools/result_parser.py](./tools/result_parser.py).
