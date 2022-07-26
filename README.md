@@ -47,7 +47,7 @@ If you find our code or papers useful, please cite:
 - [x] Pretrained agents
 - [x] Training script
 - [x] Dataset upload
-- [ ] Leaderboard submission instructions
+- [x] Leaderboard submission instructions
 - [ ] Additional tools
 
 
@@ -168,6 +168,27 @@ ${WORK_DIR}/tools/result_parser.py --xml ${WORK_DIR}/leaderboard/data/longest6/l
 ```
 
 It will generate a results.csv file containing the average results of the run as well as additional statistics. It also generates town maps and marks the locations where infractions occurred.
+
+### Submitting to the CARLA leaderboard
+To submit to the CARLA leaderboard you need docker installed on your system.
+Edit the paths at the start of [make_docker.sh](./leaderboard/scripts/make_docker.sh).
+Create the folder *team_code_transfuser/model_ckpt/transfuser*
+Copy the *model.pth* files and *args.txt* that you want to evaluate to *team_code_transfuser/model_ckpt/transfuser*.
+If you want to evaluate an ensemble simply copy multiple .pth files into the folder, the code will load all of them and ensemble the predictions.
+
+```Shell
+cd leaderboard
+cd scripts
+./make_docker.sh
+```
+The script will create a docker image with the name transfuser-agent.
+Follow the instructions on the [leaderboard](https://leaderboard.carla.org/submit/) to make an account and install alpha.
+
+```Shell
+alpha login
+alpha benchmark:submit  --split 3 transfuser-agent:latest
+```
+The command will upload the docker image to the cloud and evaluate it.
 
 <!-- ### Building docker image
 

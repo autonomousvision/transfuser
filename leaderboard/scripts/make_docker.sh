@@ -1,8 +1,8 @@
 #!/bin/bash
-export CARLA_ROOT=/home/hiwi/CARLA
-export SCENARIO_RUNNER_ROOT=/home/hiwi/challenge_submission_2021/scenario_runner
-export LEADERBOARD_ROOT=/home/hiwi/challenge_submission_2021/leaderboard
-export TEAM_CODE_ROOT=/home/hiwi/challenge_submission_2021/team_code_latest
+export CARLA_ROOT=/path/to/CARLA
+export SCENARIO_RUNNER_ROOT=/path/to/scenario_runner
+export LEADERBOARD_ROOT=/path/to/leaderboard
+export TEAM_CODE_ROOT=/path/to/team_code_transfuser
 export PYTHONPATH="${CARLA_ROOT}/PythonAPI/carla/":"${SCENARIO_RUNNER_ROOT}":"${LEADERBOARD_ROOT}":${PYTHONPATH}
 
 if [ -z "$CARLA_ROOT" ]
