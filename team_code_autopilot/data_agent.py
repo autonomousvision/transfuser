@@ -202,6 +202,13 @@ class DataAgent(AutoPilot):
 
     @torch.no_grad()
     def run_step(self, input_data, timestamp):
+        if not ('hd_map' in input_data.keys()) and not self.initialized:
+            control = carla.VehicleControl()
+            control.steer = 0.0
+            control.throttle = 0.0
+            control.brake = 1.0
+            return control
+
         control = super().run_step(input_data, timestamp)
 
         if self.step % self.save_freq == 0:
