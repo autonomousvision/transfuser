@@ -58,6 +58,8 @@ class DataAgent(AutoPilot):
             (self.save_path / 'semantics').mkdir()
             (self.save_path / 'depth').mkdir()
 
+        self._active_traffic_light = None
+
     def _init(self, hd_map):
         super()._init(hd_map)
         self._sensors = self.sensor_interface._sensors_objects
