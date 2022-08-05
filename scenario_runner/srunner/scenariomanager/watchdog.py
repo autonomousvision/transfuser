@@ -69,7 +69,8 @@ class Watchdog(object):
         """
         Stops the watchdog.
         """
-        self._timer.cancel()
+        if self._timer is not None:
+            self._timer.cancel()
 
     def get_status(self):
         """
