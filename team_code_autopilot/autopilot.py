@@ -266,6 +266,8 @@ class AutoPilot(autonomous_agent_local.AutonomousAgent):
 
         if steer is None:
             theta = input_data['imu'][1][-1]
+            if math.isnan(theta):  # simulation bug
+                theta = 0.0
             steer = self._get_steer(brake, waypoint_route, pos, theta, speed)
             steer_extrapolation = self._get_steer_extrapolation(waypoint_route, pos, theta, speed)
 
