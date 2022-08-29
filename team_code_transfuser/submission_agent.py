@@ -258,7 +258,7 @@ class HybridAgent(autonomous_agent.AutonomousAgent):
 
         num_points = None
         if(self.backbone == 'latentTF'): # Image only method
-            lidar_bev = torch.zeros((1, 2, self.config.lidar_resolution, self.config.lidar_resolution)).to('cuda', dtype=torch.float32) #Dummy data
+            lidar_bev = torch.zeros((1, 2, self.config.lidar_resolution_width, self.config.lidar_resolution_height)).to('cuda', dtype=torch.float32) #Dummy data
         else:
             # prepare LiDAR input
             if (self.config.use_point_pillars == True):
