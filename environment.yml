@@ -23,6 +23,6 @@ dependencies:
   - zlib=1.2.12=h7f8727e_2
   - cudatoolkit=10.2
   - pip:
-    - -r team_code_latest/requirements.txt
+    - -r team_code_transfuser/requirements.txt
     - mmsegmentation==0.25.0
     - mmdet==2.25.0
