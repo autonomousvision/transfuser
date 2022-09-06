@@ -1,17 +1,17 @@
 # TransFuser: Imitation with Transformer-Based Sensor Fusion for Autonomous Driving
 
-## [Paper](https://arxiv.org/abs/2205.15997) 
+## [Paper](http://www.cvlibs.net/publications/Chitta2022PAMI.pdf) | [Supplementary](http://www.cvlibs.net/publications/Chitta2022PAMI_supplementary.pdf) | [Talk](https://www.youtube.com/watch?v=-GMhYcxOiEU) | [Poster](http://www.cvlibs.net/publications/Chitta2022PAMI_poster.pdf) 
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/transfuser-imitation-with-transformer-based/autonomous-driving-on-carla-leaderboard)](https://paperswithcode.com/sota/autonomous-driving-on-carla-leaderboard?p=transfuser-imitation-with-transformer-based)
 
 <img src="figures/demo.gif">
 
-This repository contains the code for the paper [TransFuser: Imitation with Transformer-Based Sensor Fusion for Autonomous Driving](https://arxiv.org/abs/2205.15997). 
-This work is a journal extension of the CVPR 2021 paper [Multi-Modal Fusion Transformer for End-to-End Autonomous Driving](https://arxiv.org/abs/2104.09224). 
-The code of the CVPR 2021 paper is available in the [cvpr2021](https://github.com/autonomousvision/transfuser/tree/cvpr2021) branch.
+This repository contains the code for the PAMI 2022 paper [TransFuser: Imitation with Transformer-Based Sensor Fusion for Autonomous Driving](https://arxiv.org/abs/2205.15997). This work is a journal extension of the CVPR 2021 paper [Multi-Modal Fusion Transformer for End-to-End Autonomous Driving](https://arxiv.org/abs/2104.09224). The code for the CVPR 2021 paper is available in the [cvpr2021](https://github.com/autonomousvision/transfuser/tree/cvpr2021) branch.
 
 If you find our code or papers useful, please cite:
 
 ```bibtex
-@article{Chitta2022ARXIV,
+@article{Chitta2022PAMI,
   author = {Chitta, Kashyap and
             Prakash, Aditya and
             Jaeger, Bernhard and
@@ -19,8 +19,7 @@ If you find our code or papers useful, please cite:
             Renz, Katrin and
             Geiger, Andreas},
   title = {TransFuser: Imitation with Transformer-Based Sensor Fusion for Autonomous Driving},
-  journal = {arXiv},
-  volume  = {2205.15997},
+  journal = {Pattern Analysis and Machine Intelligence (PAMI)},
   year = {2022},
 }
 ```
@@ -35,21 +34,6 @@ If you find our code or papers useful, please cite:
   year = {2021}
 }
 ```
-
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/transfuser-imitation-with-transformer-based/autonomous-driving-on-carla-leaderboard)](https://paperswithcode.com/sota/autonomous-driving-on-carla-leaderboard?p=transfuser-imitation-with-transformer-based)
-
-## ToDos
-
-- [x] Autopilot
-- [x] Training scenarios and routes
-- [x] Longest6 benchmark
-- [x] Inference code
-- [x] Data generation
-- [x] Pretrained agents
-- [x] Training script
-- [x] Dataset upload
-- [x] Leaderboard submission instructions
-- [ ] Additional tools
 
 
 ## Contents
