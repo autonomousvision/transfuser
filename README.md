@@ -119,6 +119,9 @@ Set the variable OMP_NUM_THREADS to the number of cpus available on your system.
 Set OPENBLAS_NUM_THREADS=1 if you want to avoid threads spawning other threads.
 Set --nproc_per_node to the number of available GPUs on your node.
 
+The evaluation agent file is build to evaluate models trained with multiple GPUs. 
+If you want to evaluate a model trained with a single GPU you need to remove [this line](https://github.com/autonomousvision/transfuser/blob/a7d4db684c160095dec03851aff5ce92e36b2387/team_code_transfuser/submission_agent.py#LL95C18-L95C18).
+
 
 ## Evaluation
 
