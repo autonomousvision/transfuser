@@ -36,6 +36,7 @@ If you find our code or papers useful, please cite:
 ```
 
 Also, check out the code for other recent work on CARLA from our group:
+- [Jaeger et al., Hidden Biases of End-to-End Driving Models (ICCV 2023)](https://github.com/autonomousvision/carla_garage)
 - [Renz et al., PlanT: Explainable Planning Transformers via Object-Level Representations (CoRL 2022)](https://github.com/autonomousvision/plant)
 - [Hanselmann et al., KING: Generating Safety-Critical Driving Scenarios for Robust Imitation via Kinematics Gradients (ECCV 2022)](https://github.com/autonomousvision/king)
 - [Chitta et al., NEAT: Neural Attention Fields for End-to-End Autonomous Driving (ICCV 2021)](https://github.com/autonomousvision/neat)
