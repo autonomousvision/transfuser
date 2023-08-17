@@ -10,31 +10,6 @@ This repository contains the code for the PAMI 2022 paper [TransFuser: Imitation
 
 If you find our code or papers useful, please cite:
 
-```bibtex
-@article{Chitta2022PAMI,
-  author = {Chitta, Kashyap and
-            Prakash, Aditya and
-            Jaeger, Bernhard and
-            Yu, Zehao and
-            Renz, Katrin and
-            Geiger, Andreas},
-  title = {TransFuser: Imitation with Transformer-Based Sensor Fusion for Autonomous Driving},
-  journal = {Pattern Analysis and Machine Intelligence (PAMI)},
-  year = {2022},
-}
-```
-
-```bibtex
-@inproceedings{Prakash2021CVPR,
-  author = {Prakash, Aditya and
-            Chitta, Kashyap and
-            Geiger, Andreas},
-  title = {Multi-Modal Fusion Transformer for End-to-End Autonomous Driving},
-  booktitle = {Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year = {2021}
-}
-```
-
 Also, check out the code for other recent work on CARLA from our group:
 - [Jaeger et al., Hidden Biases of End-to-End Driving Models (ICCV 2023)](https://github.com/autonomousvision/carla_garage)
 - [Renz et al., PlanT: Explainable Planning Transformers via Object-Level Representations (CoRL 2022)](https://github.com/autonomousvision/plant)
