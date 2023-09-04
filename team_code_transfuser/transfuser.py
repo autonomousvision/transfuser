@@ -19,7 +19,8 @@ class TransfuserBackbone(nn.Module):
         self.avgpool_img = nn.AdaptiveAvgPool2d((self.config.img_vert_anchors, self.config.img_horz_anchors))
         self.avgpool_lidar = nn.AdaptiveAvgPool2d((self.config.lidar_vert_anchors, self.config.lidar_horz_anchors))
         
-        self.image_encoder = ImageCNN(architecture=image_architecture, normalize=True)
+        self.image_encoder = ImageCNN(architecture=image_architecture, normalize=True,
+                                      out_features=self.config.perception_output_features)
 
         if(config.use_point_pillars == True):
             in_channels = config.num_features[-1]
@@ -29,7 +30,8 @@ class TransfuserBackbone(nn.Module):
         if(self.config.use_target_point_image == True):
             in_channels += 1
 
-        self.lidar_encoder = LidarEncoder(architecture=lidar_architecture, in_channels=in_channels)
+        self.lidar_encoder = LidarEncoder(architecture=lidar_architecture, in_channels=in_channels,
+                                          out_features=self.config.perception_output_features)
 
         self.transformer1 = GPT(n_embd=self.image_encoder.features.feature_info[1]['num_chs'],
                             n_head=config.n_head,
@@ -372,7 +374,7 @@ class ImageCNN(nn.Module):
         normalize (bool): whether the input images should be normalized
     """
 
-    def __init__(self, architecture, normalize=True):
+    def __init__(self, architecture, normalize=True, out_features=512):
         super().__init__()
         self.normalize = normalize
         self.features = timm.create_model(architecture, pretrained=True)
@@ -411,7 +413,7 @@ class ImageCNN(nn.Module):
 
             #This layer norm is not pretrained anymore but that shouldn't matter since it is the last layer in the network.
             _tmp = self.features.global_pool.norm
-            self.features.global_pool.norm = nn.LayerNorm((self.config.perception_output_features,1,1), _tmp.eps, _tmp.elementwise_affine)
+            self.features.global_pool.norm = nn.LayerNorm((out_features,1,1), _tmp.eps, _tmp.elementwise_affine)
 
 
 def normalize_imagenet(x):
@@ -434,7 +436,7 @@ class LidarEncoder(nn.Module):
         in_channels: input channels
     """
 
-    def __init__(self, architecture, in_channels=2):
+    def __init__(self, architecture, in_channels=2, out_features=512):
         super().__init__()
 
         self._model = timm.create_model(architecture, pretrained=False)
@@ -466,7 +468,7 @@ class LidarEncoder(nn.Module):
             self._model.global_pool.fc = nn.Sequential()
             self._model.head = nn.Sequential()
             _tmp = self._model.global_pool.norm
-            self._model.global_pool.norm = nn.LayerNorm((self.config.perception_output_features,1,1), _tmp.eps, _tmp.elementwise_affine)
+            self._model.global_pool.norm = nn.LayerNorm((out_features,1,1), _tmp.eps, _tmp.elementwise_affine)
 
         # Change the first conv layer so that it matches the amount of channels in the LiDAR
         # Timm might be able to do this automatically
@@ -475,11 +477,16 @@ class LidarEncoder(nn.Module):
         self._model.conv1 = nn.Conv2d(in_channels, out_channels=_tmp.out_channels,
             kernel_size=_tmp.kernel_size, stride=_tmp.stride, padding=_tmp.padding, bias=use_bias)
         # Need to delete the old conv_layer to avoid unused parameters
-        del _tmp
-        del self._model.stem.conv
+        if architecture.startswith('convnext'):
+          del self._model.stem._modules['0']
+        elif architecture.startswith('regnet'):
+          del self._model.stem.conv
         torch.cuda.empty_cache()
         if(use_bias):
             self._model.conv1.bias = _tmp.bias
+
+        del _tmp
+
 
 class SelfAttention(nn.Module):
     """
