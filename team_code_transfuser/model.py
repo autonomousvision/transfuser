@@ -7,6 +7,7 @@ from transfuser import TransfuserBackbone, SegDecoder, DepthDecoder
 from geometric_fusion import GeometricFusionBackbone
 from late_fusion import LateFusionBackbone
 from latentTF import latentTFBackbone
+from copy import deepcopy
 from point_pillar import PointPillarNet
 
 
@@ -978,8 +979,8 @@ class LidarCenterNet(nn.Module):
         if not expert_waypoints is None:
             images = self.draw_waypoints(label[0], expert_waypoints[i:i+1], images, color=(0, 0, 255))
 
-        images = self.draw_waypoints(label[0], pred_wp[i:i + 1, 2:], images, color=(255, 255, 255)) # Auxliary waypoints in white
-        images = self.draw_waypoints(label[0], pred_wp[i:i + 1, :2], images, color=(255, 0, 0))     # First two, relevant waypoints in blue
+        images = self.draw_waypoints(label[0], deepcopy(pred_wp[i:i + 1, 2:]), images, color=(255, 255, 255)) # Auxliary waypoints in white
+        images = self.draw_waypoints(label[0], deepcopy(pred_wp[i:i + 1, :2]), images, color=(255, 0, 0))     # First two, relevant waypoints in blue
 
         # draw target points
         images = self.draw_target_point(target_point[i].detach().cpu().numpy(), images)
@@ -1001,8 +1002,8 @@ class LidarCenterNet(nn.Module):
         if not expert_waypoints is None:
             bev_image = self.draw_waypoints(label[0], expert_waypoints[i:i+1], bev_image, color=(0, 0, 255))
 
-        bev_image = self.draw_waypoints(label[0], pred_wp[i:i + 1], bev_image, color=(255, 255, 255))
-        bev_image = self.draw_waypoints(label[0], pred_wp[i:i + 1, :2], bev_image, color=(255, 0, 0))
+        bev_image = self.draw_waypoints(label[0], deepcopy(pred_wp[i:i + 1, 2:]), bev_image, color=(255, 255, 255))
+        bev_image = self.draw_waypoints(label[0], deepcopy(pred_wp[i:i + 1, :2]), bev_image, color=(255, 0, 0))
 
         bev_image = self.draw_target_point(target_point[i].detach().cpu().numpy(), bev_image)
 
