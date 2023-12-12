@@ -89,7 +89,7 @@ class TransfuserBackbone(nn.Module):
                             resid_pdrop=config.resid_pdrop,
                             config=config, use_velocity=use_velocity)
 
-        if(self.image_encoder.features.feature_info[4]['num_chs'] != self.config.perception_output_features):
+        if(self.image_encoder.features.feature_info[4]['num_chs'] != self.config.perception_output_features):   # 1x1 conv to change the number of channels
             self.change_channel_conv_image = nn.Conv2d(self.image_encoder.features.feature_info[4]['num_chs'], self.config.perception_output_features, (1, 1))
             self.change_channel_conv_lidar = nn.Conv2d(self.image_encoder.features.feature_info[4]['num_chs'], self.config.perception_output_features, (1, 1))
         else:
@@ -107,7 +107,7 @@ class TransfuserBackbone(nn.Module):
         
         # lateral
         self.c5_conv = nn.Conv2d(self.config.perception_output_features, channel, (1, 1))
-        
+
     def top_down(self, x):
 
         p5 = self.relu(self.c5_conv(x))
@@ -151,6 +151,7 @@ class TransfuserBackbone(nn.Module):
         lidar_embd_layer1 = self.avgpool_lidar(lidar_features)
 
         image_features_layer1, lidar_features_layer1 = self.transformer1(image_embd_layer1, lidar_embd_layer1, velocity)
+        # Upsample to original size
         image_features_layer1 = F.interpolate(image_features_layer1, size=(image_features.shape[2],image_features.shape[3]), mode='bilinear', align_corners=False)
         lidar_features_layer1 = F.interpolate(lidar_features_layer1, size=(lidar_features.shape[2],lidar_features.shape[3]), mode='bilinear', align_corners=False)
         image_features = image_features + image_features_layer1

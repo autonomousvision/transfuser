@@ -21,7 +21,7 @@ dependencies:
   - wheel=0.37.1=pyhd3eb1b0_0
   - xz=5.2.5=h7b6447c_0
   - zlib=1.2.12=h7f8727e_2
-  - cudatoolkit=10.2
+  - cudatoolkit=11.3
   - pip:
     - -r team_code_transfuser/requirements.txt
     - mmsegmentation==0.25.0

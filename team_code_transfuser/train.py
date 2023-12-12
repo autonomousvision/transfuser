@@ -112,7 +112,7 @@ def main():
 
     torch.cuda.set_device(device)
 
-    torch.backends.cudnn.benchmark = True # Wen want the highest performance
+    torch.backends.cudnn.benchmark = True # We want the highest performance
 
     # Configure config
     config = GlobalConfig(root_dir=args.root_dir, setting=args.setting)
