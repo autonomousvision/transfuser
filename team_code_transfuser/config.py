@@ -135,6 +135,25 @@ class GlobalConfig:
                        'loss_offset', 'loss_yaw_class', 'loss_yaw_res', 'loss_velocity', 'loss_brake']
     detailed_losses_weights = [1.0, 1.0, 1.0, 1.0, 0.2, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0]
 
+    # Uncertainty-weighted multi-task loss (Kendall et al., CVPR 2018).
+    # When True, LidarCenterNet learns one log-variance scalar per task group
+    # (wp, bev, depth, semantic, detection) and forms loss_total as
+    #   sum_i ( exp(-s_i) * L_i + 0.5 * s_i ).
+    # The per-task `detailed_losses_weights` above are still applied first, so
+    # tasks weighted to 0.0 (e.g. loss_velocity, loss_brake) contribute nothing.
+    uncertainty_weights = False
+    # Task groups used by the uncertainty-weighted loss. Each value is the list
+    # of detailed-loss keys that share a single learned log-variance.
+    uncertainty_task_groups = {
+        'wp':        ['loss_wp'],
+        'bev':       ['loss_bev'],
+        'depth':     ['loss_depth'],
+        'semantic':  ['loss_semantic'],
+        'detection': ['loss_center_heatmap', 'loss_wh', 'loss_offset',
+                      'loss_yaw_class', 'loss_yaw_res',
+                      'loss_velocity', 'loss_brake'],
+    }
+
     perception_output_features = 512 # Number of features outputted by the perception branch.
     bev_features_chanels = 64 # Number of channels for the BEV feature pyramid
     bev_upsample_factor = 2

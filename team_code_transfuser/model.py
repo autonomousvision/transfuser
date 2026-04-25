@@ -608,6 +608,73 @@ class LidarCenterNet(nn.Module):
         self.turn_controller = PIDController(K_P=config.turn_KP, K_I=config.turn_KI, K_D=config.turn_KD, n=config.turn_n)
         self.speed_controller = PIDController(K_P=config.speed_KP, K_I=config.speed_KI, K_D=config.speed_KD, n=config.speed_n)
 
+        # Optional uncertainty-weighted multi-task loss (Kendall et al., CVPR 2018).
+        # One learnable log-variance per task group declared in config. These are
+        # registered on the module (not the device explicitly) so they move with
+        # the model under DDP and are serialized inside model.state_dict().
+        self.uncertainty_weights = bool(getattr(config, 'uncertainty_weights', False))
+        self.uncertainty_task_groups = dict(getattr(config, 'uncertainty_task_groups', {}))
+        if self.uncertainty_weights:
+            self.log_vars = nn.ParameterDict({
+                name: nn.Parameter(torch.zeros(1))
+                for name in self.uncertainty_task_groups.keys()
+            }).to(self.device)
+        else:
+            self.log_vars = None
+
+    @staticmethod
+    def _uncertainty_term(loss_val, log_var):
+        # 0.5 * exp(-s) * L + 0.5 * s. The 0.5 in front of the data term is the
+        # original Kendall formulation for L1/L2 regression; the regularizer
+        # 0.5 * s is identical. Using the same 0.5 across both terms keeps the
+        # gradient w.r.t. s well-conditioned regardless of loss magnitude.
+        return 0.5 * torch.exp(-log_var) * loss_val + 0.5 * log_var
+
+    def compute_combined_loss(self, loss_dict, detailed_weights):
+        """Combine the per-task losses produced by ``forward`` into a scalar.
+
+        Args:
+            loss_dict: mapping ``loss_name -> tensor`` as returned by ``forward``.
+            detailed_weights: mapping ``loss_name -> float`` with the existing
+                hand-tuned per-task weights (e.g. ``config.detailed_losses_weights``
+                packed by ``train.py``).
+
+        Returns:
+            ``(total_loss, weighted_components)`` where ``weighted_components``
+            is a dict of detached scalars suitable for TensorBoard logging.
+            Each value equals ``detailed_weights[k] * loss_dict[k]`` so the
+            existing per-key plots remain comparable across runs.
+        """
+        device = next(iter(loss_dict.values())).device
+        weighted = {}
+        for k, v in loss_dict.items():
+            w = float(detailed_weights.get(k, 0.0))
+            weighted[k] = w * v
+
+        if not self.uncertainty_weights or self.log_vars is None:
+            total = torch.zeros((), device=device, dtype=torch.float32)
+            for v in weighted.values():
+                total = total + v
+            return total, weighted
+
+        total = torch.zeros((), device=device, dtype=torch.float32)
+        for group_name, keys in self.uncertainty_task_groups.items():
+            group_sum = torch.zeros((), device=device, dtype=torch.float32)
+            any_nonzero = False
+            for k in keys:
+                if k not in weighted:
+                    continue
+                w = float(detailed_weights.get(k, 0.0))
+                if w == 0.0:
+                    continue
+                group_sum = group_sum + weighted[k]
+                any_nonzero = True
+            if not any_nonzero:
+                continue
+            log_var = self.log_vars[group_name].squeeze()
+            total = total + self._uncertainty_term(group_sum, log_var)
+        return total, weighted
+
     def forward_gru(self, z, target_point):
         z = self.join(z)
     
