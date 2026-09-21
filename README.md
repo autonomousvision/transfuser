@@ -2,7 +2,9 @@
 
 ## [Paper](http://www.cvlibs.net/publications/Chitta2022PAMI.pdf) | [Supplementary](http://www.cvlibs.net/publications/Chitta2022PAMI_supplementary.pdf) | [Talk](https://www.youtube.com/watch?v=-GMhYcxOiEU) | [Poster](http://www.cvlibs.net/publications/Chitta2022PAMI_poster.pdf) | [Slides](https://kashyap7x.github.io/assets/pdf/talks/Chitta2022AIR.pdf)
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/transfuser-imitation-with-transformer-based/autonomous-driving-on-carla-leaderboard)](https://paperswithcode.com/sota/autonomous-driving-on-carla-leaderboard?p=transfuser-imitation-with-transformer-based)
+[![Papers with Code: #12 on CARLA Longest6](https://paperswithcode.co/api/v1/papers/2205.15997/leaderboard-badge.svg?eval=30891&live=1)](https://paperswithcode.co/api/v1/papers/2205.15997/leaderboard-badge-link?eval=30891)
+[![Papers with Code: #3 on CARLA Longest6 (Privileged)](https://paperswithcode.co/api/v1/papers/2205.15997/leaderboard-badge.svg?eval=30889&live=1)](https://paperswithcode.co/api/v1/papers/2205.15997/leaderboard-badge-link?eval=30889)
+[![Papers with Code: #12 on CARLA Longest6](https://paperswithcode.co/api/v1/papers/2205.15997/leaderboard-badge.svg?eval=17656&live=1)](https://paperswithcode.co/api/v1/papers/2205.15997/leaderboard-badge-link?eval=17656)
 
 <img src="figures/demo.gif">
 
